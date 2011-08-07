@@ -23,7 +23,8 @@ Bundle 'YankRing.vim'
 filetype plugin indent on
 
 
-
+" 常に行数を表示する
+ set nu
 
 " input date
 :noremap! <F5> <ESC>:execute 'normal a'.strftime('%Y/%m/%d %H:%M:%S')<CR>a
