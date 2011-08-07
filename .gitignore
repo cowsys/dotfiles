@@ -1,5 +1,6 @@
 " vim
-.vim/vundle
+.vim/vundle.git
+.vim/bundle/
 
 " vimperator
 .vimperator/info
