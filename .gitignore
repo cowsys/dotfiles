@@ -1,4 +1,6 @@
 " vim
+.vim/.netrwhist
+.vim/.netrwhist~
 .vim/vundle.git
 .vim/bundle/
 

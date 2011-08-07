@@ -14,14 +14,18 @@ Bundle 'tpope/vim-surround'
 " vim-scripts repos
 Bundle 'vcscommand.vim'
 Bundle 'YankRing.vim'
-Bundle 'Align.vim'
-Bundle 'YankRing.vim'
 
 " non github repos
 
 
 filetype plugin indent on
 
+colorscheme elflord
+set expandtab
+set tabstop=4
+
+set nobackup
+set noswapfile
 
 " 常に行数を表示する
  set nu
