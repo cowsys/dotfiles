@@ -1,5 +1,7 @@
 [user]
-	name = cowsys
-	email = cowsys@gmail.com
+    name = cowsys
+    email = cowsys@gmail.com
 [color]
-	ui = auto
+    ui = auto
+[core]
+    editor = vim
