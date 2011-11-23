@@ -1,6 +1,7 @@
 " vim
 .vim/.netrwhist
 .vim/.netrwhist~
+.vim/yankring_history_v2.txt
 .vim/vundle.git
 .vim/bundle/
 
