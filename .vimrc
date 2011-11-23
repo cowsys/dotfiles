@@ -15,7 +15,7 @@ Bundle 'vcscommand.vim'
 Bundle 'YankRing.vim'
 """ bundleと相性がわるいようなのでコメントアウト
 "Bundle 'Align.vim'
-Bundle 'ShowMarks'
+"Bundle 'ShowMarks'
 Bundle 'confluencewiki.vim'
 
 " etc
