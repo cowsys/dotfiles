@@ -65,13 +65,6 @@ augroup END
 colorscheme elflord
 
 
-" ファイル保存時に構文チェックを行う
-""" for php
-augroup phpsyntaxcheck
-    autocmd!
-    autocmd BufWrite *.php w !php -l
-augroup END
-
 " vimgrep検索時、cwオプション無しでQuickFixウィンドウで開く
 augroup grepopen
     autocmd!
@@ -152,3 +145,10 @@ endif
 " ステータスラインに文字コードと改行コードを表示(http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-japanese#TOC-7
 set laststatus=2
 set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P\
+
+" highright search
+set hlsearch
+
+" php構文チェック(http://d.hatena.ne.jp/i_ogi/20070321/1174495931
+:set makeprg=php\ -l\ %
+:set errorformat=%m\ in\ %f\ on\ line\ %l"
