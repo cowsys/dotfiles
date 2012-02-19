@@ -9,6 +9,7 @@ call vundle#rc()
 Bundle 'thinca/vim-quickrun'
 Bundle 'mattn/zencoding-vim'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-fugitive'
 
 " vim-scripts repos
 Bundle 'vcscommand.vim'
@@ -195,3 +196,13 @@ let g:quickrun_config['php.unit'] = {
    \'command': 'phpunit',
    \'outputter': 'phpunit_outputter',
    \}
+
+" for Fugitive(http://vim-users.jp/2011/06/hack219/) {{{
+nnoremap <Space>gd :<C-u>Gdiff<Enter>
+nnoremap <Space>gs :<C-u>Gstatus<Enter>
+nnoremap <Space>gl :<C-u>Glog<Enter>
+nnoremap <Space>ga :<C-u>Gwrite<Enter>
+nnoremap <Space>gc :<C-u>Gcommit<Enter>
+nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
+nnoremap <Space>gb :<C-u>Gblame<Enter>
+" }}}
