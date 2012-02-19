@@ -24,8 +24,12 @@ Bundle 'bufexplorer.zip'
 
 filetype plugin indent on
 
+syntax on
 set expandtab
 set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
 
 set nobackup
 set noswapfile
