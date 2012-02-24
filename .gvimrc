@@ -293,3 +293,6 @@ endif
 let $SSH_ASKPASS = simplify($VIM . '/../../MacOS') . '/macvim-askpass'
 set noimdisable
 set imdisableactivate
+
+"  背景透過設定
+set transparency=20
