@@ -10,6 +10,7 @@ Bundle 'thinca/vim-quickrun'
 Bundle 'mattn/zencoding-vim'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tomtom/tcomment_vim'
 
 " vim-scripts repos
 Bundle 'vcscommand.vim'
