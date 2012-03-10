@@ -14,7 +14,8 @@ Bundle 'tomtom/tcomment_vim'
 
 " vim-scripts repos
 Bundle 'vcscommand.vim'
-Bundle 'YankRing.vim'
+"Bundle 'YankRing.vim'
+"Bundle 'errormarker.vim'
 """ bundleと相性がわるいようなのでコメントアウト
 "Bundle 'Align.vim'
 "Bundle 'ShowMarks'
