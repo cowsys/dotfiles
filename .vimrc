@@ -41,7 +41,8 @@ set noswapfile
 set nu
 
 " input date
-:noremap! <F5> <ESC>:execute 'normal a'.strftime('%Y/%m/%d %H:%M')<CR>a
+:noremap! <F1> <ESC>:execute 'normal a'.strftime('%Y/%m/%d %H:%M')<CR>a
+:noremap! <F2> <ESC>:execute 'normal a'.strftime('%H:%M')<CR>a
 
 " share copy buffer
 :set clipboard=unnamed
