@@ -11,6 +11,7 @@ Bundle 'mattn/zencoding-vim'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tomtom/tcomment_vim'
+Bundle 'gregsexton/gitv'
 
 " vim-scripts repos
 "Bundle 'vcscommand.vim'
@@ -161,44 +162,44 @@ set hlsearch
 """:set makeprg=php\ -l\ %
 """:set errorformat=%m\ in\ %f\ on\ line\ %l"
 """
-"""" quickrunでphpunitを実行する(http://d.hatena.ne.jp/ruedap/20110225/vim_php_phpunit_quickrun
-"""augroup QuickRunPHPUnit
-"""  autocmd!
-"""  autocmd BufWinEnter,BufNewFile *Test.php set filetype=php.unit
-"""augroup END
-"""
-""""" 初期化
-"""let g:quickrun_config = {}
-""""" PHPUnit
-""""let g:quickrun_config['php.unit'] = {'command': 'phpunit'}
-"""
-"""" barの色づけ(http://d.hatena.ne.jp/uk_oasis/20110928/1317217247
-"""" make outputter for coloring output message.
-"""let phpunit_outputter = quickrun#outputter#buffer#new()
-"""function! phpunit_outputter.init(session)
-"""  " call original process
-"""  call call(quickrun#outputter#buffer#new().init, [a:session], self)
-"""endfunction
-"""
-"""function! phpunit_outputter.finish(session)
-"""  " set color
-"""  highlight default PhpUnitOK         ctermbg=Green ctermfg=White
-"""  highlight default PhpUnitFail       ctermbg=Red   ctermfg=White
-"""  highlight default PhpUnitAssertFail ctermfg=Red
-"""  call matchadd("PhpUnitFail","^FAILURES.*$")
-"""  call matchadd("PhpUnitOK","^OK.*$")
-"""  call matchadd("PhpUnitAssertFail","^Failed.*$")
-"""  call call(quickrun#outputter#buffer#new().finish, [a:session], self)
-"""endfunction
-"""
-"""" regist outputter to quickrun
-"""call quickrun#register_outputter("phpunit_outputter", phpunit_outputter)
-"""
-"""" PHPUNIT
-"""let g:quickrun_config['php.unit'] = {
-"""   \'command': 'phpunit',
-"""   \'outputter': 'phpunit_outputter',
-"""   \}
+" quickrunでphpunitを実行する(http://d.hatena.ne.jp/ruedap/20110225/vim_php_phpunit_quickrun
+augroup QuickRunPHPUnit
+  autocmd!
+  autocmd BufWinEnter,BufNewFile *Test.php set filetype=php.unit
+augroup END
+
+"" 初期化
+let g:quickrun_config = {}
+"" PHPUnit
+"let g:quickrun_config['php.unit'] = {'command': 'phpunit'}
+
+" barの色づけ(http://d.hatena.ne.jp/uk_oasis/20110928/1317217247
+" make outputter for coloring output message.
+let phpunit_outputter = quickrun#outputter#buffer#new()
+function! phpunit_outputter.init(session)
+  " call original process
+  call call(quickrun#outputter#buffer#new().init, [a:session], self)
+endfunction
+
+function! phpunit_outputter.finish(session)
+  " set color
+  highlight default PhpUnitOK         ctermbg=Green ctermfg=White
+  highlight default PhpUnitFail       ctermbg=Red   ctermfg=White
+  highlight default PhpUnitAssertFail ctermfg=Red
+  call matchadd("PhpUnitFail","^FAILURES.*$")
+  call matchadd("PhpUnitOK","^OK.*$")
+  call matchadd("PhpUnitAssertFail","^Failed.*$")
+  call call(quickrun#outputter#buffer#new().finish, [a:session], self)
+endfunction
+
+" regist outputter to quickrun
+call quickrun#register_outputter("phpunit_outputter", phpunit_outputter)
+
+" PHPUNIT
+let g:quickrun_config['php.unit'] = {
+   \'command': 'phpunit',
+   \'outputter': 'phpunit_outputter',
+   \}
 
 " for Fugitive(http://vim-users.jp/2011/06/hack219/) {{{
 nnoremap <Space>gd :<C-u>Gdiff<Enter>
