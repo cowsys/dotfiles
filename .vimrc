@@ -210,3 +210,8 @@ nnoremap <Space>gc :<C-u>Gcommit<Enter>
 nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
 nnoremap <Space>gb :<C-u>Gblame<Enter>
 " }}}
+
+
+" for gitv(http://d.hatena.ne.jp/cohama/20120417/1334679297 {{{
+autocmd FileType git :setlocal foldlevel=99
+" }}}
