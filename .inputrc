@@ -6,11 +6,19 @@ set output-meta on
 
 # mysql
 $if mysql
-"\C-x": "show databases;\n"
-"\C-xt": "show full tables;\n"
-"\C-xg": "show grants;\n"
-"\C-xv": "show variables;\n"
-"\C-xq": "show variables;\n"
-"\C-xp": "show full processlist;\n"
-"\C-xw": "create database if not exists delta; create table if not exists delta.global_status like information_schema.global_status; select a.VARIABLE_NAME, b.VARIABLE_VALUE - a.VARIABLE_VALUE as DELTA_VALUE, floor((b.VARIABLE_VALUE - a.VARIABLE_VALUE) * 60 / (select b.VARIABLE_VALUE - a.VARIABLE_VALUE from delta.global_status as a join information_schema.global_status as b using(VARIABLE_NAME) where VARIABLE_NAME = 'Uptime')) as DELTA_PER_MIN from delta.global_status as a join information_schema.global_status as b using(VARIABLE_NAME); truncate delta.global_status; insert into delta.global_status select * from information_schema.global_status;\n"
+"\C-xd":  "show databases;\n"
+"\C-xt":  "show full tables;\n"
+"\C-xg":  "show grants;\n"
+"\C-xgv": "show global variables;\n"
+"\C-xsv": "show session variables;\n"
+"\C-xgs": "show global status;\n" # note:exist performance influence
+"\C-xss": "show session status;\n"
+"\C-xp":  "show full processlist;\n"
+"\C-xw":  "create database if not exists delta; create table if not exists delta.global_status like information_schema.global_status; select a.VARIABLE_NAME, b.VARIABLE_VALUE - a.VARIABLE_VALUE as DELTA_VALUE, floor((b.VARIABLE_VALUE - a.VARIABLE_VALUE) * 60 / (select b.VARIABLE_VALUE - a.VARIABLE_VALUE from delta.global_status as a join information_schema.global_status as b using(VARIABLE_NAME) where VARIABLE_NAME = 'Uptime')) as DELTA_PER_MIN from delta.global_status as a join information_schema.global_status as b using(VARIABLE_NAME); truncate delta.global_status; insert into delta.global_status select * from information_schema.global_status;\n"
+
+"\C-xfs":  "flush status;\n"
+
+
+"\C-xsts":  "show table status\\G\n"
+"\C-xstsl":  "show table status like '%%'\\G"
 $endif
