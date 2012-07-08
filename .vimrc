@@ -12,14 +12,10 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'gregsexton/gitv'
+Bundle 'h1mesuke/vim-alignta'
 
 " vim-scripts repos
-"Bundle 'vcscommand.vim'
-"Bundle 'YankRing.vim'
 Bundle 'errormarker.vim'
-""" bundleと相性がわるいようなのでコメントアウト
-"Bundle 'Align.vim'
-"Bundle 'ShowMarks'
 Bundle 'confluencewiki.vim'
 
 " etc
