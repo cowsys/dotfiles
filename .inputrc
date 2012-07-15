@@ -21,4 +21,5 @@ $if mysql
 
 "\C-xsts":  "show table status\\G\n"
 "\C-xstsl":  "show table status like '%%'\\G"
+"\C-xsi":  "show index in \\G"
 $endif
