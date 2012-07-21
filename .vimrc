@@ -13,6 +13,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'gregsexton/gitv'
 Bundle 'h1mesuke/vim-alignta'
+Bundle 'kien/ctrlp.vim'
 
 " vim-scripts repos
 Bundle 'errormarker.vim'
