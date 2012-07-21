@@ -1,4 +1,5 @@
 export LANG=ja_JP.UTF-8
+export SANDBOX_HOME=$HOME/mysql-sandbox
 
 # key bind
 bindkey -e
