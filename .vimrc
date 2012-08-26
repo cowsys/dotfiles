@@ -14,9 +14,10 @@ Bundle 'tomtom/tcomment_vim'
 Bundle 'gregsexton/gitv'
 Bundle 'h1mesuke/vim-alignta'
 Bundle 'kien/ctrlp.vim'
+Bundle 'scrooloose/syntastic'
 
 " vim-scripts repos
-Bundle 'errormarker.vim'
+"Bundle 'errormarker.vim'
 Bundle 'confluencewiki.vim'
 
 " etc
@@ -211,4 +212,9 @@ nnoremap <Space>gb :<C-u>Gblame<Enter>
 
 " for gitv(http://d.hatena.ne.jp/cohama/20120417/1334679297 {{{
 autocmd FileType git :setlocal foldlevel=99
+" }}}
+"
+" for syntastic {{{
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=2
 " }}}
