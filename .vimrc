@@ -16,6 +16,7 @@ Bundle 'h1mesuke/vim-alignta'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'JavaScript-syntax'
 
 " vim-scripts repos
 "Bundle 'errormarker.vim'
