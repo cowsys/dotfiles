@@ -221,7 +221,7 @@ let g:syntastic_auto_loc_list=2
 "
 " ウィンドウ移動用キーバインド(http://yuroyoro.hatenablog.com/entry/20120211/1328930819 {{{
 nnoremap <C-j> :<C-w>j
-nnoremap <C-k> :<C-k>j
-nnoremap <C-l> :<C-l>j
-nnoremap <C-h> :<C-h>j
+nnoremap <C-k> :<C-w>k
+nnoremap <C-l> :<C-w>l
+nnoremap <C-h> :<C-w>h
 " }}}
