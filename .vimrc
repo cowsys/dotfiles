@@ -218,3 +218,10 @@ autocmd FileType git :setlocal foldlevel=99
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
 " }}}
+"
+" ウィンドウ移動用キーバインド(http://yuroyoro.hatenablog.com/entry/20120211/1328930819 {{{
+nnoremap <C-j> :<C-w>j
+nnoremap <C-k> :<C-k>j
+nnoremap <C-l> :<C-l>j
+nnoremap <C-h> :<C-h>j
+" }}}
