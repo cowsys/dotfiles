@@ -219,9 +219,9 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
 " }}}
 "
-" ウィンドウ移動用キーバインド(http://yuroyoro.hatenablog.com/entry/20120211/1328930819 {{{
-nnoremap <C-j> :<C-w>j
-nnoremap <C-k> :<C-w>k
-nnoremap <C-l> :<C-w>l
-nnoremap <C-h> :<C-w>h
+" ウィンドウ移動用キーバインド(http://yuroyoro.hatenablog.com/entry/20120211/1328930819, https://github.com/yuroyoro/dotfiles/blob/master/.vimrc.moving {{{
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
 " }}}
