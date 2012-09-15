@@ -15,6 +15,7 @@ Bundle 'gregsexton/gitv'
 Bundle 'h1mesuke/vim-alignta'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/syntastic'
+Bundle 'Lokaltog/vim-easymotion'
 
 " vim-scripts repos
 "Bundle 'errormarker.vim'
