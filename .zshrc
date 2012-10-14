@@ -66,3 +66,6 @@ alias src='cd ~/src'
 
 ## global alias
 alias -g V-=' | vim -'
+source /Users/kaz/bin/zaw/zaw.zsh
+
+export JSTESTDRIVER_HOME=~/bin
