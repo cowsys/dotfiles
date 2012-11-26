@@ -262,3 +262,8 @@ inoremap <buffer><expr> { smartchr#one_of(' {', ' {<cr>')
 inoremap <buffer><expr> } smartchr#one_of(' }', ' }<cr>')
 inoremap <buffer><expr> ; smartchr#one_of(';', ';<cr>')
 " }}}
+"
+"
+"" ウィンドウに余裕を持たせてスクロールする(http://d.hatena.ne.jp/vimtaku/20121117/1353138802# {{{
+set scrolloff=10
+"" }}}
