@@ -17,10 +17,12 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'JavaScript-syntax'
+Bundle 'kana/vim-smartchr'
 
 " vim-scripts repos
 "Bundle 'errormarker.vim'
 Bundle 'confluencewiki.vim'
+Bundle 'ack.vim'
 
 " etc
 Bundle 'bufexplorer.zip'
@@ -239,4 +241,24 @@ let g:EasyMotion_grouping=1
 " カラー設定変更
 hi EasyMotionTarget ctermbg=none ctermfg=red
 hi EasyMotionShade  ctermbg=none ctermfg=blue
+" }}}
+"
+"
+"" gnu global
+map <C-g> :Gtags
+map <C-i> :Gtags -f %<CR>
+map <C-j><C-j> :GtagsCursor<CR>
+map <C-n> :cn<CR>
+map <C-p> :cp<CR>
+
+
+"" for vim-smartchr(http://d.hatena.ne.jp/ampmmn/20080925/1222338972 {{{
+inoremap <buffer><expr> = smartchr#one_of(' = ', ' == ', ' === ')
+inoremap <buffer><expr> , smartchr#one_of(', ', ',')
+inoremap <buffer><expr> + smartchr#one_of(' + ', '++', '+')
+inoremap <buffer><expr> - smartchr#one_of(' - ', '--', '-')
+inoremap <buffer><expr> / smartchr#one_of(' / ', '// ', '/')
+inoremap <buffer><expr> { smartchr#one_of(' {', ' {<cr>')
+inoremap <buffer><expr> } smartchr#one_of(' }', ' }<cr>')
+inoremap <buffer><expr> ; smartchr#one_of(';', ';<cr>')
 " }}}
