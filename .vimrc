@@ -18,6 +18,9 @@ Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'JavaScript-syntax'
 Bundle 'kana/vim-smartchr'
+Bundle 'kana/vim-operator-user'
+Bundle 'kana/vim-operator-replace'
+
 
 " vim-scripts repos
 "Bundle 'errormarker.vim'
@@ -266,4 +269,14 @@ inoremap <buffer><expr> ; smartchr#one_of(';', ';<cr>')
 "
 "" ウィンドウに余裕を持たせてスクロールする(http://d.hatena.ne.jp/vimtaku/20121117/1353138802# {{{
 set scrolloff=10
+"" }}}
+
+"" qでウインドウを閉じてQでマクロ(http://d.hatena.ne.jp/vimtaku/20121117/1353138802# {{{
+nnoremap q :<C-u>q<CR>
+nnoremap Q q
+"" }}}
+
+"" for operator replace(https://github.com/kana/vim-operator-replace/blob/master/doc/operator-replace.txt {{{
+" _wなどでYankしてるもので置き換える
+nmap _ <Plug>(operator-replace)
 "" }}}
