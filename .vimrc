@@ -264,6 +264,8 @@ inoremap <buffer><expr> / smartchr#one_of(' / ', '// ', '/')
 inoremap <buffer><expr> { smartchr#one_of(' {', ' {<cr>')
 inoremap <buffer><expr> } smartchr#one_of(' }', ' }<cr>')
 inoremap <buffer><expr> ; smartchr#one_of(';', ';<cr>')
+inoremap <buffer><expr> i smartchr#one_of('i', 'ii', '{info}')
+inoremap <buffer><expr> c smartchr#one_of('c', 'cc', '{code}')
 " }}}
 "
 "
