@@ -20,7 +20,9 @@ Bundle 'JavaScript-syntax'
 Bundle 'kana/vim-smartchr'
 Bundle 'kana/vim-operator-user'
 Bundle 'kana/vim-operator-replace'
-
+Bundle 'fuenor/qfixgrep'
+Bundle 'kana/vim-smartinput'
+Bundle 'thinca/vim-ref'
 
 " vim-scripts repos
 "Bundle 'errormarker.vim'
@@ -256,21 +258,22 @@ map <C-p> :cp<CR>
 
 
 "" for vim-smartchr(http://d.hatena.ne.jp/ampmmn/20080925/1222338972 {{{
-inoremap <buffer><expr> = smartchr#one_of(' = ', ' == ', ' === ')
-inoremap <buffer><expr> , smartchr#one_of(', ', ',')
-inoremap <buffer><expr> + smartchr#one_of(' + ', '++', '+')
-inoremap <buffer><expr> - smartchr#one_of(' - ', '--', '-')
-inoremap <buffer><expr> / smartchr#one_of(' / ', '// ', '/')
-inoremap <buffer><expr> { smartchr#one_of(' {', ' {<cr>')
-inoremap <buffer><expr> } smartchr#one_of(' }', ' }<cr>')
-inoremap <buffer><expr> ; smartchr#one_of(';', ';<cr>')
-inoremap <buffer><expr> i smartchr#one_of('i', 'ii', '{info}')
-inoremap <buffer><expr> c smartchr#one_of('c', 'cc', '{code}')
+inoremap <expr> = smartchr#one_of(' = ', ' == ', ' === ')
+inoremap <expr> , smartchr#one_of(', ', ',')
+inoremap <expr> + smartchr#one_of(' + ', '++', '+')
+inoremap <expr> - smartchr#one_of(' - ', '--', '-')
+inoremap <expr> / smartchr#one_of(' / ', '// ', '/')
+inoremap <expr> . smartchr#one_of('.', '->')
+"inoremap <expr> { smartchr#one_of(' {', ' {<cr>')
+"inoremap <expr> } smartchr#one_of(' }', ' }<cr>')
+inoremap <expr> ; smartchr#one_of(';', ';<cr>')
+inoremap <expr> i smartchr#one_of('i', 'ii', '{info}')
+inoremap <expr> c smartchr#one_of('c', 'cc', '{code}')
 " }}}
 "
 "
 "" ウィンドウに余裕を持たせてスクロールする(http://d.hatena.ne.jp/vimtaku/20121117/1353138802# {{{
-set scrolloff=10
+""set scrolloff=10
 "" }}}
 
 "" qでウインドウを閉じてQでマクロ(http://d.hatena.ne.jp/vimtaku/20121117/1353138802# {{{
@@ -282,3 +285,16 @@ nnoremap Q q
 " _wなどでYankしてるもので置き換える
 nmap _ <Plug>(operator-replace)
 "" }}}
+
+
+" for ctrlp(ref:http://kien.github.com/ctrlp.vim/
+let g:ctrlp_map = '<c-k>'
+
+" for qfixgrep(
+let MyGrep_ExcludeReg = '[~#]$\|\.bak$\|\.o$\|\.obj$\|\.exe$\|[/\\]tags$\|^tags$|[/\\]svn[/\\][/\\]git[/\\]'
+
+" for vim-ref php documents
+let g:ref_phpmanual_path = '~/.vim/langdoc/php'
+
+"Escの2回押しでハイライト消去
+nmap <ESC><ESC> ;nohlsearch<CR><ESC>
