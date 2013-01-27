@@ -32,6 +32,7 @@ my @dotifiles = (
     '.vimperatorrc',
     '.vimrc',
     '.zshrc',
+    '.tmux.conf',
 );
 for (@dotifiles) {
     system "rm -rf $home/$_" if -e "$home/$_";
