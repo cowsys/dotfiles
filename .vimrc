@@ -14,7 +14,7 @@ Bundle 'tomtom/tcomment_vim'
 Bundle 'gregsexton/gitv'
 Bundle 'h1mesuke/vim-alignta'
 Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/syntastic'
+"Bundle 'scrooloose/syntastic'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'JavaScript-syntax'
 Bundle 'kana/vim-smartchr'
@@ -23,6 +23,15 @@ Bundle 'kana/vim-operator-replace'
 Bundle 'fuenor/qfixgrep'
 Bundle 'kana/vim-smartinput'
 Bundle 'thinca/vim-ref'
+"Bundle 'cowsys/ctrlp-vimref'
+Bundle 'thinca/vim-ref'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'tpope/vim-repeat'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'thinca/vim-visualstar'
+Bundle 'taku-o/vim-toggle'
+Bundle 'kana/vim-textobj-user'
+Bundle 'kana/vim-textobj-function'
 
 " vim-scripts repos
 "Bundle 'errormarker.vim'
@@ -31,7 +40,7 @@ Bundle 'ack.vim'
 
 " etc
 Bundle 'bufexplorer.zip'
-
+Bundle 'matchit.zip'
 
 filetype plugin indent on
 
@@ -70,7 +79,7 @@ au InsertLeave * hi StatusLine guifg=DarkBlue guibg=DarkGray   gui=none ctermfg=
 
 " 不可視文字表示設定
 """ tab, 行末space
-set list listchars=tab:>-,trail:_
+set list listchars=tab:^-,trail:_
 """ 全角space
 scriptencoding utf-8
 augroup highlightIdegraphicSpace
@@ -224,8 +233,8 @@ autocmd FileType git :setlocal foldlevel=99
 " }}}
 "
 " for syntastic {{{
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=2
+"let g:syntastic_enable_signs=1
+"let g:syntastic_auto_loc_list=1
 " }}}
 "
 " ウィンドウ移動用キーバインド(http://yuroyoro.hatenablog.com/entry/20120211/1328930819, https://github.com/yuroyoro/dotfiles/blob/master/.vimrc.moving {{{
@@ -238,7 +247,7 @@ nnoremap <C-h> <C-w>h
 "
 " for vim-easymotion(http://blog.remora.cx/2012/08/vim-easymotion.html {{{
 " ホームポジションに近いキーを使う
-let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVB'
+let g:EasyMotion_keys='hjlasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVBk'
 " 「'」 + 何かにマッピング
 let g:EasyMotion_leader_key="'"
 " 1 ストローク選択を優先する
@@ -256,13 +265,12 @@ map <C-j><C-j> :GtagsCursor<CR>
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
 
-
 "" for vim-smartchr(http://d.hatena.ne.jp/ampmmn/20080925/1222338972 {{{
-inoremap <expr> = smartchr#one_of(' = ', ' == ', ' === ')
+inoremap <expr> = smartchr#one_of(' = ', ' == ', ' === ', '=')
 inoremap <expr> , smartchr#one_of(', ', ',')
 inoremap <expr> + smartchr#one_of(' + ', '++', '+')
-inoremap <expr> - smartchr#one_of(' - ', '--', '-')
-inoremap <expr> / smartchr#one_of(' / ', '// ', '/')
+"inoremap <expr> - smartchr#one_of(' - ', '--', '-')
+"inoremap <expr> / smartchr#one_of(' / ', '// ', '/')
 inoremap <expr> . smartchr#one_of('.', '->')
 "inoremap <expr> { smartchr#one_of(' {', ' {<cr>')
 "inoremap <expr> } smartchr#one_of(' }', ' }<cr>')
@@ -289,12 +297,44 @@ nmap _ <Plug>(operator-replace)
 
 " for ctrlp(ref:http://kien.github.com/ctrlp.vim/
 let g:ctrlp_map = '<c-k>'
+let g:ctrlp_extensions = ['line']
+
 
 " for qfixgrep(
 let MyGrep_ExcludeReg = '[~#]$\|\.bak$\|\.o$\|\.obj$\|\.exe$\|[/\\]tags$\|^tags$|[/\\]svn[/\\][/\\]git[/\\]'
 
 " for vim-ref php documents
-let g:ref_phpmanual_path = '~/.vim/langdoc/php'
+let g:ref_phpmanual_path = $HOME. '/.vim/langdoc/php'
+
 
 "Escの2回押しでハイライト消去
-nmap <ESC><ESC> ;nohlsearch<CR><ESC>
+nmap <ESC><ESC> :nohlsearch<CR><ESC>
+
+
+" for indent-guides.vim
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_color_change_percent = 30
+let g:indent_guides_guide_size = 1
+
+
+" ビジュアルモードでインデントを行う
+vnoremap < <gv
+vnoremap > >gv
+
+
+" settings for gtags(ref:http://www.machu.jp/diary/20090308.html#p01) {{{
+"" keymapping
+map <C-g> :Gtags 
+map <C-i> :Gtags -f %<CR>
+map <C-j><C-j> :GtagsCursor<CR>
+map <C-n> :cn<CR>
+map <C-p> :cp<CR>
+"" incremental update
+let Gtags_Auto_Update = 1
+" }}}
+"
+"
+"
+set t_Co=256
+"let g:Powerline_symbols = 'fancy'
+"

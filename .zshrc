@@ -69,3 +69,13 @@ alias -g V-=' | vim -'
 source /Users/kaz/bin/zaw/zaw.zsh
 
 export JSTESTDRIVER_HOME=~/bin
+
+
+if [ -f $HOME/.phpenv/bin/phpenv ]; then
+    export PATH=$PATH:$HOME/.phpenv/bin
+    eval "$(phpenv init -)"
+fi
+
+# for mac java
+alias javac='javac -J-Dfile.encoding=UTF-8'
+alias java='java -Dfile.encoding=UTF-8'
