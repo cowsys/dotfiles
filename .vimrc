@@ -266,15 +266,15 @@ map <C-n> :cn<CR>
 map <C-p> :cp<CR>
 
 "" for vim-smartchr(http://d.hatena.ne.jp/ampmmn/20080925/1222338972 {{{
-inoremap <expr> = smartchr#one_of(' = ', ' == ', ' === ', '=')
+"inoremap <expr> = smartchr#one_of(' = ', ' == ', ' === ', '=')
 inoremap <expr> , smartchr#one_of(', ', ',')
-inoremap <expr> + smartchr#one_of(' + ', '++', '+')
+"inoremap <expr> + smartchr#one_of(' + ', '++', '+')
 "inoremap <expr> - smartchr#one_of(' - ', '--', '-')
 "inoremap <expr> / smartchr#one_of(' / ', '// ', '/')
 inoremap <expr> . smartchr#one_of('.', '->')
 "inoremap <expr> { smartchr#one_of(' {', ' {<cr>')
 "inoremap <expr> } smartchr#one_of(' }', ' }<cr>')
-inoremap <expr> ; smartchr#one_of(';', ';<cr>')
+"inoremap <expr> ; smartchr#one_of(';', ';<cr>')
 inoremap <expr> i smartchr#one_of('i', 'ii', '{info}')
 inoremap <expr> c smartchr#one_of('c', 'cc', '{code}')
 " }}}
