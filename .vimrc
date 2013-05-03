@@ -32,6 +32,7 @@ Bundle 'thinca/vim-visualstar'
 Bundle 'taku-o/vim-toggle'
 Bundle 'kana/vim-textobj-user'
 Bundle 'kana/vim-textobj-function'
+Bundle 'vim-scripts/MultipleSearch'
 
 " vim-scripts repos
 "Bundle 'errormarker.vim'
