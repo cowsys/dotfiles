@@ -1,5 +1,5 @@
-" feedSomeKeys_2
-autocmd LocationChange .* :fmapc
-" LDR
-autocmd LocationChange 'reader\.livedoor\.com/reader' :fmap j k s a p o v c <Space> <S-Space> Z z b < >
-autocmd LocationChange 'fastladder\.com/reader' :fmap j k s a p o v c <Space> <S-Space> Z z b < >
+set runtimepath=~/.vimperator
+
+:command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+lazy fmaps -u='cloud\.feedly\.com' j k n p o v gm ga gg gl / r m xes t l f b""
+lazy fmaps -u='www\.feedly\.com' j k n p o v gm ga gg gl / r m x s t l f b""
