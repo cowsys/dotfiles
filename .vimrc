@@ -1,4 +1,5 @@
 """ vundle
+aa
 set nocompatible
 filetype off
 
@@ -80,7 +81,7 @@ au InsertLeave * hi StatusLine guifg=DarkBlue guibg=DarkGray   gui=none ctermfg=
 
 " 不可視文字表示設定
 """ tab, 行末space
-set list listchars=tab:^-,trail:_
+"set list listchars=tab:^-,trail:_
 """ 全角space
 scriptencoding utf-8
 augroup highlightIdegraphicSpace
@@ -97,10 +98,6 @@ augroup grepopen
     autocmd QuickfixCmdPost vimgrep cw
 augroup END
 
-
-" yankring historyファイルの場所設定
-let g:yankring_history_dir = expand('$HOME'). '/.vim'
-let g:yankring_history_file = '.yankring_history'
 
 " command mode 時 tcsh風のキーバインドに
 cmap <C-A> <Home>
@@ -338,4 +335,7 @@ let Gtags_Auto_Update = 1
 "
 set t_Co=256
 "let g:Powerline_symbols = 'fancy'
-"
+
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+set history=500
