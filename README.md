@@ -1,5 +1,3 @@
-#
-
 # 基本設定
 dock
     右に
@@ -33,37 +31,23 @@ authenticator
 vrome
 
 
-## neobundle(by curl->)
-
-
 
 ## dotfiles
+```
+curl -s https://github.com/cowsys/dotfiles/raw/master/bootstrap_init | bash -
+curl -s https://github.com/cowsys/dotfiles/raw/master/bootstrap | bash -
+```
+
+## neobundle
+```
+$ curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh > install.sh
+$ sh ./install.sh
+```
 
 
-## cui softwares
-homebrew
-
-### by homebrew
-git
-ghq
-peco
-wget
-nkf
-go
-tmux
-zsh
-vim
-""zsh-completions
-tree
-
-
-
-## go softwares
-go get github.com/nsf/gocode
-godef
-    https://github.com/dgryski/iim-godef
-
-
+```
+:NeoBundleInstall
+```
 
 
 ## gui softwares

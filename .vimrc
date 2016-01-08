@@ -66,6 +66,9 @@ NeoBundleLazy 'dgryski/vim-godef', {
             \ }
 """ }}}
 
+""" in testing {{{
+""" }}}
+
 """ useless??? {{{
 NeoBundle 'tpope/vim-repeat'
 "NeoBundle 'taku-o/vim-toggle'
