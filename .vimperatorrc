@@ -1,5 +1,0 @@
-set runtimepath=~/.vimperator
-
-:command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
-lazy fmaps -u='cloud\.feedly\.com' j k n p o v gm ga gg gl / r m xes t l f b""
-lazy fmaps -u='www\.feedly\.com' j k n p o v gm ga gg gl / r m x s t l f b""

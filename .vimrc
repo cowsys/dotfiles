@@ -1,107 +1,146 @@
-""" vundle
-set nocompatible
-filetype off
+""" neobundle(https://github.com/Shougo/neobundle.vim) {{{
+" Note: Skip initialization for vim-tiny or vim-small.
+if 0 | endif
 
-set rtp+=~/.vim/vundle.git/
-call vundle#rc()
+if has('vim_starting')
+    if &compatible
+        set nocompatible  " Be iMproved
+    endif
 
-" original repos on github
-Bundle 'thinca/vim-quickrun'
-Bundle 'mattn/zencoding-vim'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'gregsexton/gitv'
-Bundle 'h1mesuke/vim-alignta'
-Bundle 'kien/ctrlp.vim'
-"Bundle 'scrooloose/syntastic'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'JavaScript-syntax'
-Bundle 'kana/vim-smartchr'
-Bundle 'kana/vim-operator-user'
-Bundle 'kana/vim-operator-replace'
-Bundle 'fuenor/qfixgrep'
-Bundle 'kana/vim-smartinput'
-Bundle 'thinca/vim-ref'
-"Bundle 'cowsys/ctrlp-vimref'
-Bundle 'thinca/vim-ref'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'tpope/vim-repeat'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'thinca/vim-visualstar'
-Bundle 'taku-o/vim-toggle'
-Bundle 'kana/vim-textobj-user'
-Bundle 'kana/vim-textobj-function'
-Bundle 'vim-scripts/MultipleSearch'
+    " Required:
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-" vim-scripts repos
-"Bundle 'errormarker.vim'
-Bundle 'confluencewiki.vim'
-Bundle 'ack.vim'
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
 
-" etc
-Bundle 'bufexplorer.zip'
-Bundle 'matchit.zip'
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
 
+" My Bundles here: {{
+"" install&auto update vimproc
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
+NeoBundle 'fatih/molokai'
+
+NeoBundle 'fuenor/qfixgrep'
+NeoBundle 'thinca/vim-qfreplace'
+NeoBundle 'thinca/vim-visualstar'
+NeoBundle 't9md/vim-quickhl'
+
+NeoBundle 'Lokaltog/vim-easymotion'
+
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'gregsexton/gitv'
+
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'scrooloose/syntastic'
+
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'kana/vim-operator-user'
+NeoBundle 'kana/vim-operator-replace'
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'kana/vim-textobj-function'
+NeoBundle 'kana/vim-smartchr'
+NeoBundle 'kana/vim-smartinput'
+
+NeoBundle 'h1mesuke/vim-alignta'
+" コメント(http://qiita.com/alpaca_taichou/items/211cd62bee84c59ca480)
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'koron/codic-vim'
+
+""" go {{{
+" filetype判定してるようなのでlazyしない
+NeoBundle 'fatih/vim-go'
+NeoBundleLazy 'dgryski/vim-godef', {
+            \ 'autoload' : { 'filetypes' : 'go'  }
+            \ }
+""" }}}
+
+""" in testing {{{
+""" }}}
+
+""" useless??? {{{
+NeoBundle 'tpope/vim-repeat'
+"NeoBundle 'taku-o/vim-toggle'
+"NeoBundle 'nathanaelkane/vim-indent-guides'
+""" }}}
+" }}
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
+
+call neobundle#end()
+
+" Required:
 filetype plugin indent on
 
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+""" }}}
+
+
+""" for go autocompletion {{{
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+""" }}}
+
+
+"""""" basic setting {{{
+colorscheme molokai
 syntax on
+set nu
+set autoindent
+set hlsearch
+set cursorline
+
+filetype on
+
 set expandtab
-set tabstop=4
-set softtabstop=4
+set ts=4
 set shiftwidth=4
-set expandtab
+
+""""""set noexpandtab
+""""""set tabstop=4
+""""""set shiftwidth=4
 
 set nobackup
 set noswapfile
 
-" 常に行数を表示する
-set nu
+" omni補完を有効にする
+set omnifunc=syntaxcomplete#Complete
+" omni詳細な補完内容を表示
+set completeopt=menu,preview
 
-" input date
-:noremap! <F1> <ESC>:execute 'normal a'.strftime('%Y/%m/%d %H:%M')<CR>a
-:noremap! <F2> <ESC>:execute 'normal a'.strftime('%H:%M')<CR>a
+nnoremap q :<C-u>q<CR>
+nnoremap Q q
 
-" share copy buffer
-:set clipboard=unnamed
+noremap ; :
+noremap : ;
+"""""" }}}
 
-" ツールバーを削除
-set guioptions-=T
-
-"メニューを削除
-set guioptions-=m
-
-" ヘルプ検索順序を日本語->英語に設定
-:set helplang=ja
-
+""" status line {{{
 " モードの違いをステータスライン色で表現
 au InsertEnter * hi StatusLine guifg=DarkBlue guibg=DarkYellow gui=none ctermfg=Blue ctermbg=Yellow cterm=none
 au InsertLeave * hi StatusLine guifg=DarkBlue guibg=DarkGray   gui=none ctermfg=Blue ctermbg=Yellow cterm=none
 
-" 不可視文字表示設定
-""" tab, 行末space
-set list listchars=tab:^-,trail:_
-""" 全角space
-scriptencoding utf-8
-augroup highlightIdegraphicSpace
-    autocmd!
-    autocmd ColorScheme * highlight IdeographicSpace term=underline ctermbg=DarkGreen guibg=DarkGreen
-    autocmd VimEnter,WinEnter * match IdeographicSpace /　/
-augroup END
-colorscheme elflord
+" ステータスラインに文字コードと改行コードを表示(http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-japanese#TOC-7
+set laststatus=2
+set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P\
+""" }}}
+"""""" for Gitv-diff-folding(http:/cohama.hateblo.jp/entry/20120417/1334679297) {{{
+autocmd FileType git :setlocal foldlevel=99
+""" }}}
 
-
-" vimgrep検索時、cwオプション無しでQuickFixウィンドウで開く
-augroup grepopen
-    autocmd!
-    autocmd QuickfixCmdPost vimgrep cw
-augroup END
-
-
-" yankring historyファイルの場所設定
-let g:yankring_history_dir = expand('$HOME'). '/.vim'
-let g:yankring_history_file = '.yankring_history'
-
+""" keybinds {{{
 " command mode 時 tcsh風のキーバインドに
 cmap <C-A> <Home>
 cmap <C-F> <Right>
@@ -110,143 +149,105 @@ cmap <C-D> <Delete>
 cmap <Esc>b <S-Left>
 cmap <Esc>f <S-Right>
 
+" ノーマルモートでもエンターキーで改行を挿入(http://blog.blueblack.net/item_317) {{{
+noremap <CR> o<ESC>
 
-" 文字コードの自動認識(http://www.kawaz.jp/pukiwiki/?vim
-if &encoding !=# 'utf-8'
-  set encoding=japan
-  set fileencoding=japan
-endif
-if has('iconv')
-  let s:enc_euc = 'euc-jp'
-  let s:enc_jis = 'iso-2022-jp'
-  " iconvがeucJP-msに対応しているかをチェック
-  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'eucjp-ms'
-    let s:enc_jis = 'iso-2022-jp-3'
-  " iconvがJISX0213に対応しているかをチェック
-  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213'
-    let s:enc_jis = 'iso-2022-jp-3'
-  endif
-  " fileencodingsを構築
-  if &encoding ==# 'utf-8'
-    let s:fileencodings_default = &fileencodings
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = &fileencodings .','. s:fileencodings_default
-    unlet s:fileencodings_default
-  else
-    let &fileencodings = &fileencodings .','. s:enc_jis
-    set fileencodings+=utf-8,ucs-2le,ucs-2
-    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-      set fileencodings+=cp932
-      set fileencodings-=euc-jp
-      set fileencodings-=euc-jisx0213
-      set fileencodings-=eucjp-ms
-      let &encoding = s:enc_euc
-      let &fileencoding = s:enc_euc
-    else
-      let &fileencodings = &fileencodings .','. s:enc_euc
-    endif
-  endif
-  " 定数を処分
-  unlet s:enc_euc
-  unlet s:enc_jis
-endif
-" 日本語を含まない場合は fileencoding に encoding を使うようにする
-if has('autocmd')
-  function! AU_ReCheck_FENC()
-    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-      let &fileencoding=&encoding
-    endif
-  endfunction
-  autocmd BufReadPost * call AU_ReCheck_FENC()
-endif
-" 改行コードの自動認識
-set fileformats=unix,dos,mac
-" □とか○の文字があってもカーソル位置がずれないようにする
-if exists('&ambiwidth')
-  set ambiwidth=double
-endif
+" ビジュアルモードでインデントを行う
+vnoremap < <gv
+vnoremap > >gv
+""" }}}
 
-" ステータスラインに文字コードと改行コードを表示(http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-japanese#TOC-7
-set laststatus=2
-set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P\
+"""""" for japanese input(https://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-japanese/ime-control) {{{
+nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>
+nnoremap / :<C-u>set hlsearch<Return>/
+nnoremap ? :<C-u>set hlsearch<Return>?
+nnoremap * :<C-u>set hlsearch<Return>*
+nnoremap # :<C-u>set hlsearch<Return>#
 
-" highright search
-set hlsearch
+nmap <Space>m <Plug>(quickhl-manual-this)
+xmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
+xmap <Space>M <Plug>(quickhl-manual-reset)
 
-"""" php構文チェック(http://d.hatena.ne.jp/i_ogi/20070321/1174495931
-""":set makeprg=php\ -l\ %
-""":set errorformat=%m\ in\ %f\ on\ line\ %l"
-"""
-" quickrunでphpunitを実行する(http://d.hatena.ne.jp/ruedap/20110225/vim_php_phpunit_quickrun
-augroup QuickRunPHPUnit
-  autocmd!
-  autocmd BufWinEnter,BufNewFile *Test.php set filetype=php.unit
-augroup END
 
-"" 初期化
-let g:quickrun_config = {}
-"" PHPUnit
-"let g:quickrun_config['php.unit'] = {'command': 'phpunit'}
+" 「日本語入力固定モード」の動作モード
+let IM_CtrlMode = 4
+" 「日本語入力固定モード」切替キー
+inoremap <silent> <C-j> <C-^><C-r>=IMState('FixMode')<CR>
 
-" barの色づけ(http://d.hatena.ne.jp/uk_oasis/20110928/1317217247
-" make outputter for coloring output message.
-let phpunit_outputter = quickrun#outputter#buffer#new()
-function! phpunit_outputter.init(session)
-  " call original process
-  call call(quickrun#outputter#buffer#new().init, [a:session], self)
-endfunction
 
-function! phpunit_outputter.finish(session)
-  " set color
-  highlight default PhpUnitOK         ctermbg=Green ctermfg=White
-  highlight default PhpUnitFail       ctermbg=Red   ctermfg=White
-  highlight default PhpUnitAssertFail ctermfg=Red
-  call matchadd("PhpUnitFail","^FAILURES.*$")
-  call matchadd("PhpUnitOK","^OK.*$")
-  call matchadd("PhpUnitAssertFail","^Failed.*$")
-  call call(quickrun#outputter#buffer#new().finish, [a:session], self)
-endfunction
+ "カーソル一文字単位移動
+inoremap <silent> <C-f> <Left>
+inoremap <silent> <C-b> <Right>
 
-" regist outputter to quickrun
-call quickrun#register_outputter("phpunit_outputter", phpunit_outputter)
 
-" PHPUNIT
-let g:quickrun_config['php.unit'] = {
-   \'command': 'phpunit',
-   \'outputter': 'phpunit_outputter',
-   \}
+"単語単位移動（行末で止まる必要がない場合）
+inoremap <silent> <C-w> <S-Left>
+inoremap <silent> <C-d> <S-Right>
 
-" for Fugitive(http://vim-users.jp/2011/06/hack219/) {{{
-nnoremap <Space>gd :<C-u>Gdiff<Enter>
+ "
+inoremap <silent> <C-a> <Home>
+inoremap <silent> <C-e> <End>
+
+"非補完時は行移動をj,kと同じ動作にして補完中は候補選択
+"inoremap <C-n> <Down>
+"inoremap <C-p> <Up>
+
+"カーソル前の文字削除
+inoremap <silent> <BS>  <C-g>u<BS>
+inoremap <silent> <C-h> <C-g>u<C-h>
+"カーソル後の文字削除
+inoremap <silent> <Del> <C-g>u<Del>
+inoremap <silent> <C-g> <C-g>u<Del>
+
+
+"最後に挿入した文字列を挿入
+inoremap <silent> <C-z> <C-g>u<C-a>
+
+"現在行をインデント
+inoremap <silent> <Tab>   <C-g>u<C-t>
+inoremap <silent> <S-Tab> <C-g>u<C-d>
+""""""  }}}
+
+
+""""""for quickrun {{{
+""" quickrun*vimproc(http://d.hatena.ne.jp/osyo-manga/20130311/1363012363) {{{
+" runner/vimproc/updatetime で出力バッファの更新間隔をミリ秒で設定できます
+" updatetime が一時的に書き換えられてしまうので注意して下さい
+let g:quickrun_config = {
+\   "_" : {
+\       "runner" : "vimproc",
+\       "runner/vimproc/updatetime" : 60
+\   },
+\}
+""" }}}
+
+
+""" quickrun*go{{{
+let g:quickrun_config.go = {
+    \'command': 'go',
+\}
+""" }}}
+"""""" }}}
+
+""" for fugitive(http://vim-users.jp/2011/06/hack219/) {{{
+nnoremap <Space>gd :<C-u>Gvdiff<Enter>
 nnoremap <Space>gs :<C-u>Gstatus<Enter>
 nnoremap <Space>gl :<C-u>Glog<Enter>
 nnoremap <Space>ga :<C-u>Gwrite<Enter>
 nnoremap <Space>gc :<C-u>Gcommit<Enter>
 nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
 nnoremap <Space>gb :<C-u>Gblame<Enter>
-" }}}
+""" }}}
 
 
-" for gitv(http://d.hatena.ne.jp/cohama/20120417/1334679297 {{{
-autocmd FileType git :setlocal foldlevel=99
-" }}}
-"
-" for syntastic {{{
-"let g:syntastic_enable_signs=1
-"let g:syntastic_auto_loc_list=1
-" }}}
-"
-" ウィンドウ移動用キーバインド(http://yuroyoro.hatenablog.com/entry/20120211/1328930819, https://github.com/yuroyoro/dotfiles/blob/master/.vimrc.moving {{{
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
-" }}}
-"
-"
-" for vim-easymotion(http://blog.remora.cx/2012/08/vim-easymotion.html {{{
+""" for syntastic*go lint check(https://github.com/fatih/vim-go "using with syntastic") {{{
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+""" }}}
+
+
+""" for vim-easymotion(http://blog.remora.cx/2012/08/vim-easymotion.html {{{
 " ホームポジションに近いキーを使う
 let g:EasyMotion_keys='hjlasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVBk'
 " 「'」 + 何かにマッピング
@@ -256,86 +257,58 @@ let g:EasyMotion_grouping=1
 " カラー設定変更
 hi EasyMotionTarget ctermbg=none ctermfg=red
 hi EasyMotionShade  ctermbg=none ctermfg=blue
-" }}}
-"
-"
-"" gnu global
-map <C-g> :Gtags
-map <C-i> :Gtags -f %<CR>
-map <C-j><C-j> :GtagsCursor<CR>
-map <C-n> :cn<CR>
-map <C-p> :cp<CR>
-
-"" for vim-smartchr(http://d.hatena.ne.jp/ampmmn/20080925/1222338972 {{{
-"inoremap <expr> = smartchr#one_of(' = ', ' == ', ' === ', '=')
-inoremap <expr> , smartchr#one_of(', ', ',')
-"inoremap <expr> + smartchr#one_of(' + ', '++', '+')
-"inoremap <expr> - smartchr#one_of(' - ', '--', '-')
-"inoremap <expr> / smartchr#one_of(' / ', '// ', '/')
-inoremap <expr> . smartchr#one_of('.', '->')
-"inoremap <expr> { smartchr#one_of(' {', ' {<cr>')
-"inoremap <expr> } smartchr#one_of(' }', ' }<cr>')
-"inoremap <expr> ; smartchr#one_of(';', ';<cr>')
-inoremap <expr> i smartchr#one_of('i', 'ii', '{info}')
-inoremap <expr> c smartchr#one_of('c', 'cc', '{code}')
-" }}}
-"
-"
-"" ウィンドウに余裕を持たせてスクロールする(http://d.hatena.ne.jp/vimtaku/20121117/1353138802# {{{
-""set scrolloff=10
-"" }}}
-
-"" qでウインドウを閉じてQでマクロ(http://d.hatena.ne.jp/vimtaku/20121117/1353138802# {{{
-nnoremap q :<C-u>q<CR>
-nnoremap Q q
-"" }}}
-
-"" for operator replace(https://github.com/kana/vim-operator-replace/blob/master/doc/operator-replace.txt {{{
-" _wなどでYankしてるもので置き換える
-nmap _ <Plug>(operator-replace)
-"" }}}
+""" }}}
 
 
-" for ctrlp(ref:http://kien.github.com/ctrlp.vim/
+""" for ctrlp(http://kien.github.com/ctrlp.vim/ {{{
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_extensions = ['line']
+""" }}}
 
 
-" for qfixgrep(
+"""""" install test {{{
+""" refer go source (http://suzuken.hatenablog.jp/entry/2015/10/23/160503) {{{
+nmap gs <Plug>(go-def-split)
+""" }}}
+
+""" highlight err(http://yuroyoro.hatenablog.com/entry/2014/08/12/144157) {{{
+autocmd FileType go :highlight goErr cterm=bold ctermfg=214
+autocmd FileType go :match goErr /\<err\>/
+""" }}}
+"""""" }}}
+
+
+
+
+""""""" for gvim {{{
+""" input date {{{
+:noremap! <F1> <ESC>:execute 'normal a'.strftime('%Y/%m/%d %H:%M')<CR>a
+:noremap! <F2> <ESC>:execute 'normal a'.strftime('%H:%M')<CR>a
+""" }}}
+
+" share copy buffer
+:set clipboard=unnamed
+
+" ツールバーを削除
+set guioptions-=T
+
+"メニューを削除
+set guioptions-=m
+""""""" }}}
+
+
+
+""" vim-smartchr(http://d.hatena.ne.jp/ampmmn/20080925/1222338972 {{{
+inoremap <expr> . smartchr#one_of('.', '->')
+""" }}}
+
+
+
+""" qfixgrep {{{
 let MyGrep_ExcludeReg = '[~#]$\|\.bak$\|\.o$\|\.obj$\|\.exe$\|[/\\]tags$\|^tags$|[/\\]svn[/\\][/\\]git[/\\]'
-
-" for vim-ref php documents
-let g:ref_phpmanual_path = $HOME. '/.vim/langdoc/php'
+""" }}}
 
 
-"Escの2回押しでハイライト消去
-nmap <ESC><ESC> :nohlsearch<CR><ESC>
-
-
-" for indent-guides.vim
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_color_change_percent = 30
-let g:indent_guides_guide_size = 1
-
-
-" ビジュアルモードでインデントを行う
-vnoremap < <gv
-vnoremap > >gv
-
-
-" settings for gtags(ref:http://www.machu.jp/diary/20090308.html#p01) {{{
-"" keymapping
-map <C-g> :Gtags 
-map <C-i> :Gtags -f %<CR>
-map <C-j><C-j> :GtagsCursor<CR>
-map <C-n> :cn<CR>
-map <C-p> :cp<CR>
-"" incremental update
-let Gtags_Auto_Update = 1
+" ctrlp(http://kien.github.com/ctrlp.vim/ {{{
+let g:ctrlp_map = '<c-k>'
 " }}}
-"
-"
-"
-set t_Co=256
-"let g:Powerline_symbols = 'fancy'
-"

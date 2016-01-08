@@ -1,0 +1,39 @@
+#!/bin/bash
+DOTFILES=$HOME/src/github.com/cowsys/dotfiles/
+
+
+link() {
+    rm -rf $HOME/$1;
+    ln -s $DOTFILES/$1 $HOME/$1
+}
+
+
+link .bashrc
+link .bash_profile
+link .zshrc
+
+link .tmux.conf
+
+link .vimrc
+
+link .gitconfig
+
+link .config
+
+### homebrew
+### homebrew softwares
+brew install tmux
+brew install vim
+brew install zsh
+brew install peco
+brew install hub
+#brew install zsh-completions
+brew install wget
+brew install nkf
+brew install tree
+
+
+### go softwares
+go get github.com/nsf/gocode
+go get github.com/rogpeppe/godef
+go get github.com/dgryski/vim-godef

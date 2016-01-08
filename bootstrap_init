@@ -1,0 +1,15 @@
+#!/bin/bash
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+
+brew install go
+brew install git
+brew install ghq
+
+
+# set minimum gitconfig
+git config --global ghq.root "~/src"
+
+
+# get my dotfiles
+ghq get https://github.com/cowsys/dotfiles
