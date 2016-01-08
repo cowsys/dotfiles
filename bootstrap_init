@@ -1,7 +1,6 @@
 #!/bin/bash
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-sudo xcodebuild -license
 
 brew install go
 brew install git
