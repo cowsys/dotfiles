@@ -1,5 +1,12 @@
 #
 
+# 基本設定
+dock
+    右に
+    不要なものを除去・必要なもの追加
+mission control
+    ホットコーナーを設定
+
  
 ## forefox addon
 vimperator
@@ -10,8 +17,15 @@ it's all text
 webliopane
 all-in-one gestures
 useragentswitcher
-adblocker
+ublock
 refcontrol
+menu wizard
+
+
+### private addon
+1pasword
+jsonview
+
 
 
 ## chrome addon

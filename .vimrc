@@ -228,7 +228,7 @@ let g:quickrun_config.go = {
 """""" }}}
 
 """ for fugitive(http://vim-users.jp/2011/06/hack219/) {{{
-nnoremap <Space>gd :<C-u>Gdiff<Enter>
+nnoremap <Space>gd :<C-u>Gvdiff<Enter>
 nnoremap <Space>gs :<C-u>Gstatus<Enter>
 nnoremap <Space>gl :<C-u>Glog<Enter>
 nnoremap <Space>ga :<C-u>Gwrite<Enter>
