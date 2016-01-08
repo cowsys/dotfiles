@@ -4,7 +4,8 @@ dock
     不要なものを除去・必要なもの追加
 mission control
     ホットコーナーを設定
-
+mouse
+    swipe方向を逆に
  
 ## forefox addon
 vimperator
@@ -31,8 +32,8 @@ authenticator
 vrome
 
 
-
 ## dotfiles
+install xcode
 ```
 curl -s https://github.com/cowsys/dotfiles/raw/master/bootstrap_init | bash -
 curl -s https://github.com/cowsys/dotfiles/raw/master/bootstrap | bash -
