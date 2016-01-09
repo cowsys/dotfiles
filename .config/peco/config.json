@@ -1,10 +1,9 @@
 {
-    // vim like keybind(http://qiita.com/fortkle/items/52c1077a7963cb01c596#1-4)
     "keymap": {
         "C-j": "peco.SelectDown",
-            "C-k": "peco.SelectUp",
-            "C-f": "peco.ScrollPageDown",
-            "C-b": "peco.ScrollPageUp"
+        "C-k": "peco.SelectUp",
+        "C-f": "peco.ScrollPageDown",
+        "C-b": "peco.ScrollPageUp"
     },
     "Layout": "bottom-up"
 }

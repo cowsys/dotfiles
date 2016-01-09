@@ -4,9 +4,12 @@ dock
     不要なものを除去・必要なもの追加
 mission control
     ホットコーナーを設定
-mouse
+trackpad
     swipe方向を逆に
- 
+keyboard
+    keyrepeat
+
+
 ## forefox addon
 vimperator
 livehttpheaders
@@ -45,22 +48,28 @@ $ curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install
 $ sh ./install.sh
 ```
 
-
 ```
-:NeoBundleInstall
+vim
 ```
 
 
 ## gui softwares
-skitch
-iterm2
+google input
+sizeup(from gmail
+keyremap4mac(karabiner)
 firefox
 chrome
+iterm2
 gvim
-sizeup
-keyremap4mac(karabiner)
-1keyboard
-1password
-(witch
+
+skitch
 logicool options(mx master)
-google input
+
+1keyboard
+#witch
+
+### private
+dropbox
+things
+1password(from gail
+thunderbird

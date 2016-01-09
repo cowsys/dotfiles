@@ -18,7 +18,8 @@ alias gh='ghcd'
 ###}
 
 function ghcd {
-    local dir="$( find $HOME/src/*/* -type d -maxdepth 1| peco )"
+    echo "hogehoge"
+    local dir="$( find $HOME/src/*/* -type d -maxdepth 1 | peco )"
     if [ ! -z "$dir" ] ; then
         cd "$dir"
     fi
