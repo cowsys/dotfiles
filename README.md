@@ -30,7 +30,7 @@ menu wizard
 
 ### private addon
 ```
-1pasword
+1password
 jsonview
 ```
 
@@ -45,6 +45,7 @@ vrome
 
 ## dotfiles
 - install xcode
+
 ```
 curl -s https://raw.githubusercontent.com/cowsys/dotfiles/master/bootstrap_init | bash -
 curl -s https://raw.githubusercontent.com/cowsys/dotfiles/master/bootstrap      | bash -
@@ -82,6 +83,6 @@ logicool options(mx master)
 ```
 dropbox
 things
-1password(from gail
+1password(from gmail
 thunderbird
 ```
