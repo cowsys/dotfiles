@@ -38,8 +38,8 @@ vrome
 ## dotfiles
 install xcode
 ```
-curl -s https://github.com/cowsys/dotfiles/raw/master/bootstrap_init | bash -
-curl -s https://github.com/cowsys/dotfiles/raw/master/bootstrap | bash -
+curl -s https://raw.githubusercontent.com/cowsys/dotfiles/master/bootstrap_init | bash -
+curl -s https://raw.githubusercontent.com/cowsys/dotfiles/master/bootstrap      | bash -
 ```
 
 ## neobundle
