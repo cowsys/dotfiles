@@ -61,6 +61,11 @@ $ sh ./install.sh
 vim
 ```
 
+## vim-go
+```
+:GoInstallBinaries
+```
+
 
 ## gui softwares
 ```
