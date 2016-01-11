@@ -9,12 +9,8 @@ trackpad
     swipe方向を逆に
 keyboard
     keyrepeat
-<<<<<<< HEAD
     disable caps key
-=======
 ```
-
->>>>>>> 29fcb9d1af1a911dce8f17079c68cd60b01a786b
 
 ## forefox addon
 ```
