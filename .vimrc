@@ -44,6 +44,7 @@ NeoBundle 'gregsexton/gitv'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'majutsushi/tagbar'
 
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'kana/vim-operator-user'
@@ -251,7 +252,7 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 " ホームポジションに近いキーを使う
 let g:EasyMotion_keys='hjlasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVBk'
 " 「'」 + 何かにマッピング
-let g:EasyMotion_leader_key="'"
+let g:EasyMotion_leader_key=":"
 " 1 ストローク選択を優先する
 let g:EasyMotion_grouping=1
 " カラー設定変更

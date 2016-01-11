@@ -8,7 +8,7 @@ trackpad
     swipe方向を逆に
 keyboard
     keyrepeat
-
+    disable caps key
 
 ## forefox addon
 vimperator
@@ -57,6 +57,9 @@ vim
 google input
 sizeup(from gmail
 keyremap4mac(karabiner)
+    up keyrepeat
+        delay until key repat:15ms
+        keyrepeat:1ms
 firefox
 chrome
 iterm2
