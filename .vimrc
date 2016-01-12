@@ -45,6 +45,7 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'mattn/emmet-vim'
 
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'kana/vim-operator-user'
