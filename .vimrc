@@ -45,6 +45,7 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'thinca/vim-ref'
 
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'kana/vim-operator-user'
@@ -256,7 +257,7 @@ let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 " ホームポジションに近いキーを使う
 let g:EasyMotion_keys='hjlasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVBk'
 " 「'」 + 何かにマッピング
-let g:EasyMotion_leader_key=":"
+let g:EasyMotion_leader_key="'"
 " 1 ストローク選択を優先する
 let g:EasyMotion_grouping=1
 " カラー設定変更
@@ -317,3 +318,19 @@ let MyGrep_ExcludeReg = '[~#]$\|\.bak$\|\.o$\|\.obj$\|\.exe$\|[/\\]tags$\|^tags$
 " ctrlp(http://kien.github.com/ctrlp.vim/ {{{
 let g:ctrlp_map = '<c-k>'
 " }}}
+
+
+let g:ref_source_webdict_sites = {
+\   'w': {
+\     'url': 'http://ejje.weblio.jp/content/%s',
+\   },
+\ }
+
+
+let g:ref_source_webdict_sites.default = 'w'
+
+function! g:ref_source_webdict_sites.w.filter(output)
+    return join(split(a:output, "\n")[81 :], "\n")
+endfunction
+
+nmap <Leader>ww :<C-u>Ref webdict w<Space>

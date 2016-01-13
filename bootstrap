@@ -32,6 +32,7 @@ brew install ctags
 brew install wget
 brew install nkf
 brew install tree
+brew install lynx
 
 
 ### go softwares
