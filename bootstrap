@@ -39,3 +39,9 @@ brew install lynx
 go get github.com/nsf/gocode
 go get github.com/rogpeppe/godef
 go get github.com/dgryski/vim-godef
+
+### ghq
+#### go
+##### lib&sample&docs
+ghq get https://github.com/GoogleCloudPlatform/golang-samples
+ghq get https://github.com/GoogleCloudPlatform/gcloud-golang
