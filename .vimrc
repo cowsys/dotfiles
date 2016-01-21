@@ -35,6 +35,7 @@ NeoBundle 'fuenor/qfixgrep'
 NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'thinca/vim-visualstar'
 NeoBundle 't9md/vim-quickhl'
+NeoBundle 'jceb/vim-hier'
 
 NeoBundle 'Lokaltog/vim-easymotion'
 
@@ -306,7 +307,9 @@ set guioptions-=m
 
 
 """ vim-smartchr(http://d.hatena.ne.jp/ampmmn/20080925/1222338972 {{{
+inoremap <expr> , smartchr#one_of(',', ' <- ')
 inoremap <expr> . smartchr#one_of('.', '->')
+inoremap <expr> ; smartchr#one_of(';', ' := ')
 """ }}}
 
 
@@ -334,4 +337,12 @@ function! g:ref_source_webdict_sites.w.filter(output)
     return join(split(a:output, "\n")[81 :], "\n")
 endfunction
 
-nmap <Leader>ww :<C-u>Ref webdict w<Space>
+"nmap <Leader>ww :<C-u>Ref webdict w<Space>
+nmap ,rr :<C-u>Ref webdict w<Space>
+
+""" 開いていた箇所に飛ぶ(http://advweb.seesaa.net/article/13443981.html) {{{
+augroup vimrcEx
+    au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
+    \ exe "normal g`\"" | endif
+augroup END
+""" }}}
