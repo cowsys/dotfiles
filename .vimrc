@@ -346,3 +346,12 @@ augroup vimrcEx
     \ exe "normal g`\"" | endif
 augroup END
 """ }}}
+
+
+""" tagbar toggle(https://github.com/majutsushi/tagbar) {{{
+nnoremap <Space>f :<C-u>TagbarToggle<CR>
+""" }}}
+
+
+""" () {{{
+""" }}}
