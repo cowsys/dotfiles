@@ -48,6 +48,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'mattn/emmet-vim'
+NeoBundle 'Shougo/neocomplete.vim'
 
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'kana/vim-operator-user'
@@ -214,6 +215,10 @@ inoremap <silent> <S-Tab> <C-g>u<C-d>
 """"""  }}}
 
 
+""""""enable neocomplete(https://github.com/Shougo/neocomplete.vim) {{{
+let g:neocomplete#enable_at_startup = 1
+"""""" }}}
+
 """"""for quickrun {{{
 """ quickrun*vimproc(http://d.hatena.ne.jp/osyo-manga/20130311/1363012363) {{{
 " runner/vimproc/updatetime で出力バッファの更新間隔をミリ秒で設定できます
@@ -300,7 +305,7 @@ autocmd FileType go :match goChan /\<\<-\>/
 """ }}}
 
 " share copy buffer
-:set clipboard=unnamed
+""":set clipboard=unnamed
 
 " ツールバーを削除
 set guioptions-=T
@@ -350,4 +355,13 @@ augroup vimrcEx
     au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
     \ exe "normal g`\"" | endif
 augroup END
+""" }}}
+
+
+""" tagbar toggle(https://github.com/majutsushi/tagbar) {{{
+nnoremap <Space>f :<C-u>TagbarToggle<CR>
+""" }}}
+
+
+""" () {{{
 """ }}}

@@ -1,5 +1,5 @@
 export GOPATH=$HOME
-export PATH=$GOPATH/bin/go_appengine:$PATH:$GOPATH/bin
+export PATH=/usr/local/bin:$GOPATH/bin/go_appengine:$GOPATH/bin:$PATH
 # tmuxでvimの色付けされない問題(http://qiita.com/sutoh/items/296b1277b00beae87106)
 export TERM=xterm-256color
 
@@ -23,3 +23,15 @@ function ghcd {
         cd "$dir"
     fi
 }
+
+# search history by peco(http://www.fisproject.jp/2015/01/peco/)
+peco-select-history() {
+    declare l=$(HISTTIMEFORMAT= history | sort -k1,1nr | perl -ne 'BEGIN { my @lines = (); } s/^\s*\d+\s*//; $in=$_; if (!(grep {$in eq $_} @lines)) { push(@lines, $in); print $in; }' | peco --query "$READLINE_LINE")
+    READLINE_LINE="$l"
+    READLINE_POINT=${#l}
+    # for OSX
+    if [ `uname` = "Darwin" ]; then
+        ${READLINE_LINE}
+    fi
+}
+bind -x '"\C-r": peco-select-history'
