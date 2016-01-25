@@ -283,6 +283,11 @@ nmap gs <Plug>(go-def-split)
 autocmd FileType go :highlight goErr cterm=bold ctermfg=214
 autocmd FileType go :match goErr /\<err\>/
 """ }}}
+
+""" highlight channels {{{
+autocmd FileType go :highlight goChan cterm=bold ctermfg=214
+autocmd FileType go :match goChan /\<\<-\>/
+""" }}}
 """""" }}}
 
 
