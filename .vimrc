@@ -51,6 +51,7 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'Shougo/neocomplete.vim'
 
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-abolish'
 NeoBundle 'kana/vim-operator-user'
 NeoBundle 'kana/vim-operator-replace'
 NeoBundle 'kana/vim-textobj-user'
