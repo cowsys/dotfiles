@@ -51,6 +51,7 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'Shougo/neocomplete.vim'
 
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-abolish'
 NeoBundle 'kana/vim-operator-user'
 NeoBundle 'kana/vim-operator-replace'
 NeoBundle 'kana/vim-textobj-user'
@@ -288,9 +289,9 @@ nmap gs <Plug>(go-def-split)
 autocmd FileType go :highlight goErr cterm=bold ctermfg=214
 autocmd FileType go :match goErr /\<err\>/
 """ }}}
-""" highlight channel {{{
-autocmd FileType go :highlight goChannel cterm=bold ctermfg=214
-autocmd FileType go :match goChannel /\<<-\>/
+""" highlight channels {{{
+autocmd FileType go :highlight goChan cterm=bold ctermfg=214
+autocmd FileType go :match goChan /\<\<-\>/
 """ }}}
 """""" }}}
 
@@ -303,8 +304,6 @@ autocmd FileType go :match goChannel /\<<-\>/
 :noremap! <F2> <ESC>:execute 'normal a'.strftime('%H:%M')<CR>a
 """ }}}
 
-" share copy buffer
-""":set clipboard=unnamed
 
 " ツールバーを削除
 set guioptions-=T
@@ -319,6 +318,7 @@ set guioptions-=m
 inoremap <expr> , smartchr#one_of(',', ' <- ')
 inoremap <expr> . smartchr#one_of('.', '->')
 inoremap <expr> ; smartchr#one_of(';', ' := ')
+inoremap <expr> j smartchr#one_of('j', '_')
 """ }}}
 
 
