@@ -258,6 +258,7 @@ let g:go_auto_type_info = 1
 """ for syntastic*go lint check(https://github.com/fatih/vim-go "using with syntastic") {{{
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_fmt_command = "goimports"
 """ }}}
 
 
