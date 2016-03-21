@@ -1,5 +1,6 @@
 export GOPATH=$HOME
-export PATH=/usr/local/bin:$GOPATH/bin/go_appengine:$GOPATH/bin:$PATH
+#export PATH=$PATH:$GOPATH/bin/go_appengine:$GOPATH/bin
+export PATH=/usr/local/bin:$PATH:$GOPATH/bin/go_appengine:$GOPATH/bin
 # tmuxでvimの色付けされない問題(http://qiita.com/sutoh/items/296b1277b00beae87106)
 export TERM=xterm-256color
 

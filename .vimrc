@@ -48,7 +48,11 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'mattn/emmet-vim'
+
 NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'AndrewRadev/switch.vim'
 
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-abolish'
@@ -258,7 +262,7 @@ let g:go_auto_type_info = 1
 """ for syntastic*go lint check(https://github.com/fatih/vim-go "using with syntastic") {{{
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:go_fmt_command = "goimports"
+"let g:go_fmt_command = "goimports"
 """ }}}
 
 
@@ -278,6 +282,7 @@ hi EasyMotionShade  ctermbg=none ctermfg=blue
 """ for ctrlp(http://kien.github.com/ctrlp.vim/ {{{
 let g:ctrlp_map = '<c-k>'
 let g:ctrlp_extensions = ['line']
+let g:ctrlp_cmd = 'CtrlPCurWD'
 """ }}}
 
 
@@ -320,12 +325,15 @@ inoremap <expr> , smartchr#one_of(',', ' <- ')
 inoremap <expr> . smartchr#one_of('.', '->')
 inoremap <expr> ; smartchr#one_of(';', ' := ')
 inoremap <expr> j smartchr#one_of('j', '_')
+inoremap <expr> v smartchr#one_of('v', 'vv', 'log.Infof(c, "%#v\n", obj)', '"google.golang.org/appengine/log"')
 """ }}}
 
 
 
-""" qfixgrep {{{
+""" qfixgrep(https://sites.google.com/site/fudist/Home/grep/usage) {{{
 let MyGrep_ExcludeReg = '[~#]$\|\.bak$\|\.o$\|\.obj$\|\.exe$\|[/\\]tags$\|^tags$|[/\\]svn[/\\][/\\]git[/\\]'
+" QFixGrepの検索時にカーソル位置の単語を拾う/拾わない
+let MyGrep_DefaultSearchWord = 1
 """ }}}
 
 
@@ -364,4 +372,46 @@ nnoremap <Space>f :<C-u>TagbarToggle<CR>
 
 
 """ () {{{
+" 1 : QuickFix/ロケーションリストの両方で有効
+let QFixWin_EnableMode = 1
+" QFixHowm/QFixGrepの結果表示にロケーションリストを使用する/しない
+let QFix_UseLocationList = 0
+""" }}}
+
+""" fugitiveでvertical diffをデフォルトで利用する(https://github.com/tpope/vim-fugitive/issues/508) {{{
+set diffopt+=vertical
+""" }}}
+
+
+""" Yで行末までコピー(http://ymizushi.hateblo.jp/entry/2012/11/18/232431) {{{
+nnoremap Y y$
+""" }}}
+
+""" fとtを入れ替える {{{
+nnoremap f t
+nnoremap t f
+nnoremap F T
+nnoremap T F
+""" }}}
+
+""" for neosnippet(https://github.com/Shougo/neosnippet.vim) {{{
+" Plugin key-mappings.
+imap <C-l>     <Plug>(neosnippet_expand_or_jump)
+smap <C-l>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-l>     <Plug>(neosnippet_expand_target)
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+
+let g:go_snippet_engine = "neosnippet"
+""" }}}
+
+""" for switch(https://github.com/AndrewRadev/switch.vim) {{{
+let g:switch_mapping = "-"
+""" }}}
+
+""" (template) {{{
 """ }}}
