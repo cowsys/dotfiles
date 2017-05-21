@@ -12,19 +12,8 @@ keyboard
     disable caps key
 ```
 
-## forefox addon
+## chrome addon
 ```
-vimperator
-livehttpheaders
-autopagerize
-firebug
-it's all text
-webliopane
-all-in-one gestures
-useragentswitcher
-ublock
-refcontrol
-menu wizard
 ```
 
 
