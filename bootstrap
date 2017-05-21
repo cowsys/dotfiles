@@ -15,8 +15,7 @@ link .zshrc
 link .tmux.conf
 
 link .vimrc
-link .vim/init.vim
-link .vim/config.vim
+link .vim/user
 link .gvimrc
 link .ideavimrc
 
