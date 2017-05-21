@@ -36,6 +36,7 @@ NeoBundle 'thinca/vim-qfreplace'
 NeoBundle 'thinca/vim-visualstar'
 NeoBundle 't9md/vim-quickhl'
 NeoBundle 'jceb/vim-hier'
+NeoBundle 'mattn/emoji-vim'
 
 NeoBundle 'Lokaltog/vim-easymotion'
 
@@ -48,6 +49,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'mattn/emmet-vim'
+NeoBundle 'editorconfig/editorconfig-vim'
 
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet'
@@ -57,6 +59,7 @@ NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'kana/vim-operator-user'
+NeoBundle 'osyo-manga/vim-operator-search'
 NeoBundle 'kana/vim-operator-replace'
 NeoBundle 'kana/vim-textobj-user'
 NeoBundle 'kana/vim-textobj-function'
@@ -67,6 +70,7 @@ NeoBundle 'h1mesuke/vim-alignta'
 " コメント(http://qiita.com/alpaca_taichou/items/211cd62bee84c59ca480)
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'koron/codic-vim'
+NeoBundle 'vim-scripts/gtags.vim'
 
 """ go {{{
 " filetype判定してるようなのでlazyしない
@@ -257,12 +261,12 @@ nnoremap <Space>gb :<C-u>Gblame<Enter>
 
 """ for vim-go(https://github.com/fatih/vim-go) {{{
 " display auto type info
-let g:go_auto_type_info = 1
+" let g:go_auto_type_info = 1
 """ }}}
 """ for syntastic*go lint check(https://github.com/fatih/vim-go "using with syntastic") {{{
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-"let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "goimports"
 """ }}}
 
 
@@ -281,14 +285,22 @@ hi EasyMotionShade  ctermbg=none ctermfg=blue
 
 """ for ctrlp(http://kien.github.com/ctrlp.vim/ {{{
 let g:ctrlp_map = '<c-k>'
-let g:ctrlp_extensions = ['line']
+let g:ctrlp_extensions = ['dir']
 let g:ctrlp_cmd = 'CtrlPCurWD'
+
+" カレントバッファのルートディレクトリを基準に検索
+nnoremap <C-l> :CtrlPRoot<Esc>
+
+" ignore dirs
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|cloud.google.com|github.com|goji.io|golang.org|google.golang.org|googlemaps.github.io)$'
 """ }}}
 
 
 """""" install test {{{
 """ refer go source (http://suzuken.hatenablog.jp/entry/2015/10/23/160503) {{{
 nmap gs <Plug>(go-def-split)
+nmap gr <Plug>(go-referrers)
+nmap ggc <Plug>(go-callers)
 """ }}}
 
 """ highlight err(http://yuroyoro.hatenablog.com/entry/2014/08/12/144157) {{{
@@ -306,8 +318,8 @@ autocmd FileType go :match goChan /\<\<-\>/
 
 """"""" for gvim {{{
 """ input date {{{
-:noremap! <F1> <ESC>:execute 'normal a'.strftime('%Y/%m/%d %H:%M')<CR>a
-:noremap! <F2> <ESC>:execute 'normal a'.strftime('%H:%M')<CR>a
+:noremap! <F4> ===============
+:noremap! <F5> <ESC>:execute 'normal a'.strftime('%Y/%m/%d %H:%M')<CR>a
 """ }}}
 
 
@@ -325,13 +337,12 @@ inoremap <expr> , smartchr#one_of(',', ' <- ')
 inoremap <expr> . smartchr#one_of('.', '->')
 inoremap <expr> ; smartchr#one_of(';', ' := ')
 inoremap <expr> j smartchr#one_of('j', '_')
-inoremap <expr> v smartchr#one_of('v', 'vv', 'log.Infof(c, "%#v\n", obj)', '"google.golang.org/appengine/log"')
 """ }}}
 
 
 
 """ qfixgrep(https://sites.google.com/site/fudist/Home/grep/usage) {{{
-let MyGrep_ExcludeReg = '[~#]$\|\.bak$\|\.o$\|\.obj$\|\.exe$\|[/\\]tags$\|^tags$|[/\\]svn[/\\][/\\]git[/\\]'
+let MyGrep_ExcludeReg = '[~#]$\|\.md$\|\.bak$\|\.o$\|\.obj$\|\.exe$\|[/\\]tags$\|^tags$|[/\\]svn[/\\][/\\]git[/\\]'
 " QFixGrepの検索時にカーソル位置の単語を拾う/拾わない
 let MyGrep_DefaultSearchWord = 1
 """ }}}
@@ -388,10 +399,14 @@ nnoremap Y y$
 """ }}}
 
 """ fとtを入れ替える {{{
-nnoremap f t
-nnoremap t f
-nnoremap F T
-nnoremap T F
+"nnoremap f t
+"nnoremap t f
+"nnoremap F T
+"nnoremap T F
+""" }}}
+
+""" zzとztを入れ替える {{{
+nnoremap zz zt
 """ }}}
 
 """ for neosnippet(https://github.com/Shougo/neosnippet.vim) {{{
@@ -413,5 +428,27 @@ let g:go_snippet_engine = "neosnippet"
 let g:switch_mapping = "-"
 """ }}}
 
+""" undoファイルを作成しないようにする (http://www.kaoriya.net/blog/2014/03/30/) {{{
+:set noundofile
+""" }}}
+
+""" tabを開く {{{
+ca tt tabnew
+""" }}}
+
+""" カレントウィンドウを新規タブで開き直す(http://d.hatena.ne.jp/m1204080/20101025/1288028786) {{{
+" if v:version >= 700
+"     nnoremap <C-m> :call OpenNewTab()<CR>
+"     function! OpenNewTab()
+"         let f = expand("%:p")
+"         execute ":q"
+"         execute ":tabnew ".f
+"     endfunction
+" endif
+""" }}}
+
+
 """ (template) {{{
 """ }}}
+
+

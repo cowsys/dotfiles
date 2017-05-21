@@ -6,7 +6,21 @@
 [core]
     editor = vim
     quotepath = false
+	excludesfile = ~/.gitignore_global
 [diff]
 	tool = vimdiff
+	compactionHeuristic = true
 [ghq]
     root = ~/src
+[credential]
+	helper = osxkeychain
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

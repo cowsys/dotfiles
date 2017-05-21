@@ -1,0 +1,4 @@
+.config/configstore/
+.config/gcloud/
+.config/git/
+.config/hub
