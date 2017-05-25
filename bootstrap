@@ -37,6 +37,9 @@ brew install fish
 brew install peco
 brew install hub
 brew install global --with-exuberant-ctags --with-pygments
+brew install ctags
+brew install goenv
+
 #brew install zsh-completions
 brew install bash-completion
 brew install wget
