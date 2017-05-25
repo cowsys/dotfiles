@@ -71,6 +71,7 @@ NeoBundle 'h1mesuke/vim-alignta'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'koron/codic-vim'
 NeoBundle 'vim-scripts/gtags.vim'
+NeoBundle 'zebult/auto-gtags.vim'
 
 """ go {{{
 " filetype判定してるようなのでlazyしない

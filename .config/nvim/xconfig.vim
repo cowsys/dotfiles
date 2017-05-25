@@ -156,7 +156,7 @@ nnoremap <Space>gb :<C-u>Gblame<Enter>
 
 """ for vim-go(https://github.com/fatih/vim-go) {{{
 " display auto type info
-let g:go_auto_type_info = 1
+" let g:go_auto_type_info = 1
 """ }}}
 """ for syntastic*go lint check(https://github.com/fatih/vim-go "using with syntastic") {{{
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
@@ -190,6 +190,10 @@ nnoremap <C-l> :CtrlPRoot<Esc>
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|cloud.google.com|github.com|goji.io|golang.org|google.golang.org|googlemaps.github.io)$'
 """ }}}
 
+
+" for denite.vim {{{
+
+" }}}
 
 """""" install test {{{
 """ refer go source (http://suzuken.hatenablog.jp/entry/2015/10/23/160503) {{{
@@ -342,18 +346,21 @@ ca tt tabnew
 " endif
 """ }}}
 
-""" ファイル保存時にgtagsを更新(http://qiita.com/zebult/items/270edd5d237f389f0563) {{{
-let g:auto_gtags = 1
+
+"" replace grep with ripgrep(http://wakame.hatenablog.jp/entry/2017/05/04/144550) {{{
+if executable('rg')
+  call denite#custom#var('file_rec', 'command', ['rg', '--files', '--glob', '!.git'])
+  call denite#custom#var('grep', 'command', ['rg'])
+endif
+"" }}}
+
+
+""" replace grep to ripgrep(http://www.wezm.net/technical/2016/09/ripgrep-with-vim/) {{{
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
 """ }}}
-
-
-
-map <C-g> :Gtags 
-map <C-h> :Gtags -f %<CR>
-map <C-j> :GtagsCursor<CR>
-map <C-n> :cn<CR>
-map <C-p> :cp<CR>
-
 
 """ (template) {{{
 """ }}}
