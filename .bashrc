@@ -1,9 +1,8 @@
 export GOPATH=$HOME
-#export PATH=$PATH:$GOPATH/bin/go_appengine:$GOPATH/bin
-export PATH=/usr/local/bin:$PATH:$GOPATH/bin/go_appengine:$GOPATH/bin
+export PATH=/usr/local/bin:$PATH:$HOME/google-cloud-sdk/bin
 # tmuxでvimの色付けされない問題(http://qiita.com/sutoh/items/296b1277b00beae87106)
 export TERM=xterm-256color
-export HISTSIZE=50000
+export HISTSIZE=500000
 
 GIT_PS1_SHOWUPSTREAM=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -12,7 +11,8 @@ GIT_PS1_SHOWSTASHSTATE=true
 export PS1='\h\[\033[00m\]:\W\[\033[31m\]\n$(__git_ps1 [%s])\[\033[00m\]\$ '
 
 alias ll='ls -la'
-alias  v='vim'
+# alias v='nvim'
+# alias vim='nvim'
 alias ccd='pecocd'
 #alias ddc='pecobcd'
 alias gh='ghcd'

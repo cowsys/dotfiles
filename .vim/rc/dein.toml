@@ -18,14 +18,16 @@ repo =  'tpope/vim-abolish'
 ### }}}
 
 ### Shougo product {{{
-[[plugins]]
-repo =  'Shougo/neocomplete.vim'
-[[plugins]]
-repo =  'Shougo/neosnippet'
-[[plugins]]
-repo =  'Shougo/neosnippet-snippets'
+# [[plugins]]
+# repo =  'Shougo/neocomplete.vim'
+# [[plugins]]
+# repo =  'Shougo/neosnippet'
+# [[plugins]]
+# repo =  'Shougo/neosnippet-snippets'
 [[plugins]]
 repo =  'Shougo/denite.nvim'
+[[plugins]]
+repo =  'Shougo/deoplete.nvim'
 ### }}}
 
 ### thinca product {{{
@@ -83,6 +85,11 @@ repo =  'h1mesuke/vim-alignta'
 repo =  'tomtom/tcomment_vim'
 [[plugins]]
 repo =  'vim-scripts/gtags.vim'
+[[plugins]]
+repo =  'zchee/deoplete-go'
+build = 'make'
+[[plugins]]
+repo =  'ozelentok/denite-gtags'
 ### }}}
 
 

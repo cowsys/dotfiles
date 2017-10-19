@@ -50,6 +50,9 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'editorconfig/editorconfig-vim'
+" NeoBundle 'violetyk/iikanji-markdown.vim'
+NeoBundle 'kannokanno/previm'
+
 
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet'
