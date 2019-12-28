@@ -82,7 +82,7 @@ xmap <Space>M <Plug>(quickhl-manual-reset)
 " 「日本語入力固定モード」の動作モード
 let IM_CtrlMode = 4
 " 「日本語入力固定モード」切替キー
-inoremap <silent> <C-j> <C-^><C-r>=IMState('FixMode')<CR>
+"inoremap <silent> <C-j> <C-^><C-r>=IMState('FixMode')<CR>
 
 
  "カーソル一文字単位移動
@@ -345,11 +345,11 @@ let g:auto_gtags = 1
 
 
 
-map <C-g> :Gtags 
-map <C-h> :Gtags -f %<CR>
-map <C-j> :GtagsCursor<CR>
-map <C-n> :cn<CR>
-map <C-p> :cp<CR>
+" map <C-g> :Gtags 
+" nnoremap <C-h> :Gtags -f %<CR>
+nnoremap <C-j> :GtagsCursor<CR>
+nnoremap <C-n> :cn<CR>
+nnoremap <C-p> :cp<CR>
 
 """ (previm) {{{
 au BufRead,BufNewFile *.md set filetype=markdown
@@ -366,6 +366,14 @@ nmap # #N
 "Get the 2-space YAML as the default when hit carriage return after the colon
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 """ }}}
+
+
+if executable('jq')
+  function! s:jq(...)
+    execute '%!jq' (a:0 == 0 ? '.' : a:1)
+  endfunction
+  command! -bar -nargs=? Jq  call s:jq(<f-args>)
+endif
 
 """ (template) {{{
 """ }}}

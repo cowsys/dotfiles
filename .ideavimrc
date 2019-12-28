@@ -1,7 +1,13 @@
 set clipboard=unnamed
 set hlsearch
+set wrap
+
+nnoremap q :<C-u>q<CR>
+nnoremap Q q
+
 noremap ; :
 noremap : ;
 
-" ノーマルモートでもエンターキーで改行を挿入(http://blog.blueblack.net/item_317) {{{
-noremap <CR> o<ESC>
+nnoremap Y y$
+
+nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>
