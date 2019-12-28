@@ -1,3 +1,7 @@
+set nocompatible
+filetype plugin indent on
+
+
 """ neobundle(https://github.com/Shougo/neobundle.vim) {{{
 " Note: Skip initialization for vim-tiny or vim-small.
 if 0 | endif
@@ -29,67 +33,69 @@ NeoBundle 'Shougo/vimproc.vim', {
 \     'unix' : 'gmake',
 \    },
 \ }
-NeoBundle 'fatih/molokai'
 
+
+" base
+NeoBundle 'editorconfig/editorconfig-vim' " enable EditorConfig
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'fuenor/qfixgrep'
 NeoBundle 'thinca/vim-qfreplace'
+NeoBundle 'thinca/vim-quickrun'
+
+
+" display
+NeoBundle 'fatih/molokai'
+NeoBundle 'mattn/emoji-vim'
+NeoBundle 'kannokanno/previm'
+
 NeoBundle 'thinca/vim-visualstar'
 NeoBundle 't9md/vim-quickhl'
-NeoBundle 'jceb/vim-hier'
-NeoBundle 'mattn/emoji-vim'
 
-NeoBundle 'Lokaltog/vim-easymotion'
 
+" syntax/error check
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'jceb/vim-hier' " Highlight quickfix errors
+
+
+" input
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'kana/vim-smartchr'
+NeoBundle 'kana/vim-smartinput'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'AndrewRadev/switch.vim' "toggle some symbol
+NeoBundle 'h1mesuke/vim-alignta'
+NeoBundle 'tomtom/tcomment_vim'
+
+
+" operator
+NeoBundle 'osyo-manga/vim-operator-search'
+NeoBundle 'kana/vim-operator-user'
+NeoBundle 'kana/vim-operator-replace'
+
+
+" textobj
+NeoBundle 'kana/vim-textobj-user'
+NeoBundle 'kana/vim-textobj-function'
+NeoBundle 'kana/vim-textobj-entire'
+
+
+" git
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'gregsexton/gitv'
 
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'editorconfig/editorconfig-vim'
-
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'AndrewRadev/switch.vim'
-
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'kana/vim-operator-user'
-NeoBundle 'osyo-manga/vim-operator-search'
-NeoBundle 'kana/vim-operator-replace'
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'kana/vim-textobj-function'
-NeoBundle 'kana/vim-smartchr'
-NeoBundle 'kana/vim-smartinput'
-
-NeoBundle 'h1mesuke/vim-alignta'
-" コメント(http://qiita.com/alpaca_taichou/items/211cd62bee84c59ca480)
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'koron/codic-vim'
-NeoBundle 'vim-scripts/gtags.vim'
-NeoBundle 'zebult/auto-gtags.vim'
 
 """ go {{{
-" filetype判定してるようなのでlazyしない
 NeoBundle 'fatih/vim-go'
-NeoBundleLazy 'dgryski/vim-godef', {
-            \ 'autoload' : { 'filetypes' : 'go'  }
-            \ }
+" filetype判定してるようなのでlazyしない
+" NeoBundleLazy 'dgryski/vim-godef', {
+"             \ 'autoload' : { 'filetypes' : 'go'  }
+"             \ }
 """ }}}
 
-""" in testing {{{
-""" }}}
 
-""" useless??? {{{
-NeoBundle 'tpope/vim-repeat'
-"NeoBundle 'taku-o/vim-toggle'
-"NeoBundle 'nathanaelkane/vim-indent-guides'
-""" }}}
-" }}
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc!
 
@@ -102,5 +108,3 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 """ }}}
-
-

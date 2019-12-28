@@ -1,1 +1,7 @@
 set clipboard=unnamed
+set hlsearch
+noremap ; :
+noremap : ;
+
+" ノーマルモートでもエンターキーで改行を挿入(http://blog.blueblack.net/item_317) {{{
+noremap <CR> o<ESC>

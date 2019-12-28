@@ -29,8 +29,8 @@ set omnifunc=syntaxcomplete#Complete
 " omni詳細な補完内容を表示
 set completeopt=menu,preview
 
-nnoremap q :<C-u>q<CR>
-nnoremap Q q
+" nnoremap q :<C-u>q<CR>
+" nnoremap Q q
 
 noremap ; :
 noremap : ;
@@ -155,7 +155,7 @@ nnoremap <Space>gb :<C-u>Gblame<Enter>
 
 
 """ for vim-go(https://github.com/fatih/vim-go) {{{
-" display auto type info
+display auto type info
 let g:go_auto_type_info = 1
 """ }}}
 """ for syntastic*go lint check(https://github.com/fatih/vim-go "using with syntastic") {{{
@@ -228,10 +228,7 @@ set guioptions-=m
 
 
 """ vim-smartchr(http://d.hatena.ne.jp/ampmmn/20080925/1222338972 {{{
-inoremap <expr> , smartchr#one_of(',', ' <- ')
-inoremap <expr> . smartchr#one_of('.', '->')
 inoremap <expr> ; smartchr#one_of(';', ' := ')
-inoremap <expr> j smartchr#one_of('j', '_')
 """ }}}
 
 
@@ -354,6 +351,21 @@ map <C-j> :GtagsCursor<CR>
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
 
+""" (previm) {{{
+au BufRead,BufNewFile *.md set filetype=markdown
+let g:previm_open_cmd = 'open -a Google\ Chrome'
+""" }}}
+
+""" 検索時にカーソル移動しない(https://ysano2005.hatenadiary.org/entry/20070313/1173770637) {{{
+nmap * *N
+nmap # #N
+""" }}}
+
+
+""" yaml indent() {{{
+"Get the 2-space YAML as the default when hit carriage return after the colon
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+""" }}}
 
 """ (template) {{{
 """ }}}

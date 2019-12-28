@@ -1,9 +1,0 @@
-## utils
-[[plugins]]
-repo   = 'koron/codic-vim'
-on_cmd = ['Codic']
-
-## golang
-[[plugins]]
-repo  = 'dgryski/vim-godef'
-on_ft = ['golang']

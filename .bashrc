@@ -14,7 +14,6 @@ export PS1='\h\[\033[00m\]:\W\[\033[31m\]\n$(__git_ps1 [%s])\[\033[00m\]\$ '
 alias ll='ls -la'
 alias  v='vim'
 alias ccd='pecocd'
-#alias ddc='pecobcd'
 alias gh='ghcd'
 alias gb='git branch'
 alias gc='git checkout'
@@ -35,15 +34,7 @@ shopt -u histappend
 function pecocd {
     local found="$( find . -maxdepth 6 -type d ! -path "*/.*" | peco )"
     cd "$found"
-    ###local dir="$( find . -type d -maxdepth 3 -name '.*' -prune -or -not -name '.*' | peco )"
-    ###if [ ! -z "$dir" ] ; then
-    ###    cd "$dir"
-    ###fi
 }
-#function pecobcd {
-#    local found="$(cd ../../../../../; find . -maxdepth 6 -type d ! -path "*/.*" | peco )"
-#    cd "$found"
-#}
 
 function ghcd {
     local dir="$( find $HOME/src/*/* -type d -maxdepth 1 | peco )"
