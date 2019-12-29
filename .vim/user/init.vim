@@ -2,109 +2,71 @@ set nocompatible
 filetype plugin indent on
 
 
-""" neobundle(https://github.com/Shougo/neobundle.vim) {{{
-" Note: Skip initialization for vim-tiny or vim-small.
-if 0 | endif
-
-if has('vim_starting')
-    if &compatible
-        set nocompatible  " Be iMproved
-    endif
-
-    " Required:
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" My Bundles here: {{
-"" install&auto update vimproc
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
+packadd minpac
+call minpac#init()
 
 
 " base
-NeoBundle 'editorconfig/editorconfig-vim' " enable EditorConfig
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'fuenor/qfixgrep'
-NeoBundle 'thinca/vim-qfreplace'
-NeoBundle 'thinca/vim-quickrun'
-
+call minpac#add('editorconfig/editorconfig-vim') " enable EditorConfig
+call minpac#add('kien/ctrlp.vim')
+call minpac#add('Lokaltog/vim-easymotion')
+call minpac#add('fuenor/qfixgrep')
+call minpac#add('thinca/vim-qfreplace')
+call minpac#add('thinca/vim-quickrun')
+call minpac#add('Shougo/vimproc.vim', {'do': 'silent! !make'})
+call minpac#add('prabirshrestha/async.vim')
 
 " display
-NeoBundle 'fatih/molokai'
-NeoBundle 'mattn/emoji-vim'
-NeoBundle 'kannokanno/previm'
+call minpac#add('fatih/molokai')
+call minpac#add('mattn/emoji-vim')
+call minpac#add('kannokanno/previm')
+call minpac#add('aklt/plantuml-syntax')
 
-NeoBundle 'thinca/vim-visualstar'
-NeoBundle 't9md/vim-quickhl'
+call minpac#add('rhysd/github-complete.vim')
+
+call minpac#add('thinca/vim-visualstar')
+call minpac#add('t9md/vim-quickhl')
 
 
 " syntax/error check
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'jceb/vim-hier' " Highlight quickfix errors
+call minpac#add('scrooloose/syntastic')
+call minpac#add('jceb/vim-hier') " Highlight quickfix errors
 
+" completion
+call minpac#add('prabirshrestha/vim-lsp')
+call minpac#add('natebosch/vim-lsc')
+call minpac#add('prabirshrestha/asyncomplete.vim')
+call minpac#add('prabirshrestha/asyncomplete-lsp.vim')
 
 " input
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'kana/vim-smartchr'
-NeoBundle 'kana/vim-smartinput'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'AndrewRadev/switch.vim' "toggle some symbol
-NeoBundle 'h1mesuke/vim-alignta'
-NeoBundle 'tomtom/tcomment_vim'
+call minpac#add('tpope/vim-repeat')
+call minpac#add('tpope/vim-surround')
+call minpac#add('tpope/vim-abolish')
+call minpac#add('kana/vim-smartchr')
+call minpac#add('kana/vim-smartinput')
+call minpac#add('mattn/emmet-vim')
+call minpac#add('AndrewRadev/switch.vim') "toggle some symbol
+call minpac#add('h1mesuke/vim-alignta')
+call minpac#add('tomtom/tcomment_vim')
 
 
 " operator
-NeoBundle 'osyo-manga/vim-operator-search'
-NeoBundle 'kana/vim-operator-user'
-NeoBundle 'kana/vim-operator-replace'
+call minpac#add('osyo-manga/vim-operator-search')
+call minpac#add('kana/vim-operator-user')
+call minpac#add('kana/vim-operator-replace')
 
 
 " textobj
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'kana/vim-textobj-function'
-NeoBundle 'kana/vim-textobj-entire'
+call minpac#add('kana/vim-textobj-user')
+call minpac#add('kana/vim-textobj-function')
+call minpac#add('kana/vim-textobj-entire')
 
 
 " git
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'gregsexton/gitv'
+call minpac#add('tpope/vim-fugitive')
+call minpac#add('gregsexton/gitv')
 
 
-""" go {{{
-NeoBundle 'fatih/vim-go'
-" filetype判定してるようなのでlazyしない
-" NeoBundleLazy 'dgryski/vim-godef', {
-"             \ 'autoload' : { 'filetypes' : 'go'  }
-"             \ }
-""" }}}
-
-
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
-
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-""" }}}
+" langs
+call minpac#add('fatih/vim-go')
+call minpac#add('leafgarland/typescript-vim')

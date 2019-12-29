@@ -1,28 +1,52 @@
+export PATH=~/Library/Python/3.7/bin:~/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+export GOPATH=$HOME
+
+GIT_PS1_SHOWUPSTREAM=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWDIRTYSTATE=true
+GIT_PS1_SHOWSTASHSTATE=true
+
+#export PROMPT="$PROMPT $(git-radar --zsh --fetch) "
+
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+zplug "mollifier/anyframe"
+#zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+zplug "zsh-users/zsh-completions"
+
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
+
+#autoload -Uz compinit && compinit
+
+
 # alias setting
 alias ls="ls -G -w"
-alias la="ls -aF"
-alias lf="ls -F"
 alias ll="ls -l"
 
 alias du="du -h"
 alias df="df -h"
 
-alias v='vim'
-alias vv='vim -R'
+alias vim="nvim"
+alias v='nvim'
+alias vv='nvim -R'
 
+alias diff="colordiff"
+
+alias gb='git branch'
+alias gs='git status'
+alias gp='git pull'
+
+alias gbb=anyframe-widget-checkout-git-branch
 
 ## global alias
-alias -g V-=' | vim -'
+alias -g V-=' | nvim -'
 
-
-function peco-history-selection() {
-    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
-    CURSOR=$#BUFFER
-    zle reset-prompt
-}
-
-zle -N peco-history-selection
-bindkey '^R' peco-history-selection
+# alias gh=peco-src
+alias gh=anyframe-widget-cd-ghq-repository
 
 
 # 履歴ファイルの保存先
@@ -43,8 +67,20 @@ setopt EXTENDED_HISTORY
 setopt share_history
 
 
-GIT_PS1_SHOWUPSTREAM=true
-GIT_PS1_SHOWUNTRACKEDFILES=true
-GIT_PS1_SHOWDIRTYSTATE=true
-GIT_PS1_SHOWSTASHSTATE=true
-export PS1='\h\[\033[00m\]:\W\[\033[31m\]\n$(__git_ps1 [%s])\[\033[00m\]\$ '
+# 補完機能
+#autoload -U compinit
+#compinit
+
+
+# コマンド履歴検索
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^P" history-beginning-search-backward-end
+bindkey "^N" history-beginning-search-forward-end
+#bindkey '^b' anyframe-widget-checkout-git-branch
+bindkey '^xg' anyframe-widget-cd-ghq-repository
+
+
+## hook direnv
+eval "$(direnv hook zsh)"

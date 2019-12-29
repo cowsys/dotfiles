@@ -16,7 +16,7 @@ link .tmux.conf
 
 link .vimrc
 link .vim/user
-link .vim/rc
+link .vim/pack
 link .gvimrc
 link .ideavimrc
 
@@ -51,6 +51,7 @@ brew install caskroom/cask/brew-cask
 # brew cask install visual-studio-code
 
 brew install kubernetes-cli
+brew install protobuf
 
 
 ### homebrew cask

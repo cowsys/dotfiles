@@ -2,3 +2,4 @@
 .config/gcloud/
 .config/git/
 .config/hub
+.vim/pack
