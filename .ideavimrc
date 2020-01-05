@@ -10,4 +10,6 @@ noremap : ;
 
 nnoremap Y y$
 
+noremap <CR> o<ESC>
+
 nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>

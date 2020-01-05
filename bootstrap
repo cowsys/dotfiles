@@ -47,6 +47,7 @@ brew install tree
 brew install httpie
 brew install terminal-notifier
 brew install ripgrep
+brew install jq
 brew install caskroom/cask/brew-cask
 # brew cask install visual-studio-code
 
