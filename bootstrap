@@ -38,6 +38,7 @@ brew install peco
 brew install hub
 brew install goenv
 brew install shellcheck
+brew install colordiff
 
 #brew install zsh-completions
 brew install bash-completion
@@ -53,6 +54,7 @@ brew install caskroom/cask/brew-cask
 
 brew install kubernetes-cli
 brew install protobuf
+brew install clang-format
 
 
 ### homebrew cask
