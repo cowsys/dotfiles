@@ -23,5 +23,8 @@ link .zshrc
 
 ## dirctories
 link .config
+if [ ! -d "$HOME/.vim" ]; then
+    mkdir ~/.vim
+fi
 link .vim/pack
 link .vim/user
