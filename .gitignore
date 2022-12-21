@@ -1,4 +1,8 @@
 .config/configstore/
+.config/karabiner/automatic_backups/
+.config/wireshark/
+.config/iterm2/
+.config/Line 6/
 .config/gcloud/
 .config/git/
 .config/hub

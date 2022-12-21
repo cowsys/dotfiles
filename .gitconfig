@@ -1,6 +1,8 @@
 [user]
     name = cowsys
     email = cowsys@gmail.com
+[url "github:"]
+    InsteadOf = https://github.com/
 [color]
     ui = auto
 [core]
