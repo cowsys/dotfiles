@@ -8,7 +8,7 @@ brew install ghq
 
 
 # set minimum gitconfig
-git config --global ghq.root "~/src"
+git config --global ghq.root "$HOME/src"
 
 
 # get my dotfiles
