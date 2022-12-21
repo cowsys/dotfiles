@@ -3,6 +3,7 @@
 - install xcode before exec command
 ```
 curl -s https://raw.githubusercontent.com/cowsys/dotfiles/master/bootstrap_mac_init | bash -
+curl -s https://raw.githubusercontent.com/cowsys/dotfiles/master/bootstrap_dotfiles | bash -
 curl -s https://raw.githubusercontent.com/cowsys/dotfiles/master/bootstrap      | bash -
 ```
 

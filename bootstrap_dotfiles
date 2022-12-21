@@ -1,0 +1,29 @@
+#!/bin/bash
+DOTFILES=$HOME/src/github.com/cowsys/dotfiles/
+
+
+link() {
+    rm -rf $HOME/$1;
+    ln -s $DOTFILES/$1 $HOME/$1
+}
+
+
+link .bashrc
+link .bash_profile
+link .zshrc
+
+link .tmux.conf
+
+link .vimrc
+link .vim/user
+link .vim/pack
+link .gvimrc
+link .ideavimrc
+link .xvimrc
+
+link .gitconfig
+link .gitignore
+link .gitignore_global
+
+link .config
+link .actrc

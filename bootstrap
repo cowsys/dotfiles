@@ -1,98 +1,95 @@
 #!/bin/bash
-DOTFILES=$HOME/src/github.com/cowsys/dotfiles/
-
-
-link() {
-    rm -rf $HOME/$1;
-    ln -s $DOTFILES/$1 $HOME/$1
-}
-
-
-link .bashrc
-link .bash_profile
-link .zshrc
-
-link .tmux.conf
-
-link .vimrc
-link .vim/user
-link .vim/pack
-link .gvimrc
-link .ideavimrc
-link .xvimrc
-
-link .gitconfig
-link .gitignore
-link .gitignore_global
-
-link .config
-link .actrc
 
 ### homebrew
+brew tap homebrew/cask
+# brew install homebrew/cask
+
 ### homebrew softwares
 brew install act
-brew tap caskroom/cask
+brew install watch
 brew install tmux
-brew install vim --with-lua
 brew install neovim
-brew install bash
+# brew install git-lfs
+# brew install bash
 brew install zsh
 brew install peco
-brew install hub
-brew install goenv
+# brew install hub
+# brew install goenv
+brew install direnv
 brew install shellcheck
 brew install colordiff
 
-#brew install zsh-completions
-brew install bash-completion
+brew install zsh-completions
+# brew install bash-completion
 brew install wget
-brew install nkf
-brew install tree
 brew install httpie
-brew install terminal-notifier
-brew install ripgrep
+# brew install nkf
+brew install tree
+# brew install terminal-notifier
+# brew install ripgrep
 brew install jq
-brew install homebrew/cask
-# brew cask install visual-studio-code
+# brew install nodebrew
 
-brew install kubernetes-cli
+# brew install kubernetes-cli
 brew install protobuf
+brew install protoc-gen-go
+brew install protoc-gen-go-grpc
+# brew install swift-protobuf
 brew install clang-format
-
+# brew install google-cloud-sdk
+# brew install bazel
 
 ### homebrew cask
-# brew cask install 1password
-# brew cask install alfred
-# brew cask install charles
-# brew cask install clipy
-# brew cask install dash
-# brew cask install goland
-# brew cask install google-cloud-sdk
-# brew cask install imageoptim
-# brew cask install intellij-idea
-# brew cask install iterm2
-# brew cask install jasper
-# brew cask install karabiner-elements
-# brew cask install kindle
-# brew cask install licecap
-# brew cask install macvim
-# brew cask install postman
-# brew cask install sequel-pro
-# brew cask install sizeup
-# brew cask install skitch
-# brew cask install slack
-# brew cask install sourcetree
-# brew cask install thunderbird
-# brew cask install witch
+brew install --cask audacity
+brew install --cask google-chrome
+brew install --cask google-japanese-ime
+brew install --cask stats
+brew install --cask rectangle
+brew install --cask dropbox
+#brew install --cask xmind
+brew install --cask deepl
+brew install --cask vlc
+brew install --cask visual-studio-code
+brew install --cask docker
+brew install --cask daisydisk
+brew install --cask losslesscut
+brew install --cask wireshark
+brew install --cask 1password
+brew install --cask alfred
+# brew install --cask charles
+# brew install --cask clipy
+# brew install --cask dash
+brew install --cask jetbrains-toolbox
+# brew install --cask goland
+# brew install --cask intellij-idea
+# brew install --cask imageoptim
+brew install --cask iterm2
+# brew install --cask jasper
+brew install --cask karabiner-elements
+brew install --cask kindle
+brew install --cask licecap
+brew install --cask macvim
+# brew install --cask postman
+# brew install --cask sequel-pro
+# brew install --cask sizeup
+brew install --cask skitch
+brew install --cask slack
+brew install --cask thunderbird
+# brew install --cask witch
+# brew install --cask dbeaver-community
 
+### apple softwares
+# brew install cocoapods
 
 ### go softwares
-brew install reviewdog/tap/reviewdog
-brew tap tcnksm/ehr
-brew install ghr
-
-go get github.com/nsf/gocode
-go get github.com/rogpeppe/godef
-go get github.com/dgryski/vim-godef
+# brew install reviewdog/tap/reviewdog
+# brew tap tcnksm/ehr
+# brew install ghr
+#
+# go get github.com/nsf/gocode
+# go get github.com/rogpeppe/godef
+# go get github.com/dgryski/vim-godef
+# go get -u github.com/nametake/protoc-gen-gohttp
+# go get -u github.com/nshmura/dsio
 
 ### ghq
