@@ -7,23 +7,21 @@ link() {
     ln -s $DOTFILES/$1 $HOME/$1
 }
 
-
-link .bashrc
+## files
+link .actrc
 link .bash_profile
-link .zshrc
-
-link .tmux.conf
-
-link .vimrc
-link .vim/user
-link .vim/pack
-link .gvimrc
-link .ideavimrc
-link .xvimrc
-
+link .bashrc
 link .gitconfig
 link .gitignore
 link .gitignore_global
+link .gvimrc
+link .ideavimrc
+link .tmux.conf
+link .vimrc
+link .xvimrc
+link .zshrc
 
+## dirctories
 link .config
-link .actrc
+link .vim/pack
+link .vim/user
