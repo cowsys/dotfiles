@@ -1,4 +1,6 @@
-:colorscheme molokai
+colorscheme molokai
+
+set guifont=Osaka-Mono:h22
 
 " ツールバーを削除
 set guioptions-=T
@@ -7,7 +9,7 @@ set guioptions-=T
 set guioptions-=m
 
 " share copy buffer
-:set clipboard=unnamed
+set clipboard=unnamed
 
 " 挿入モードを抜けるときにファイルを保存
 augroup autosave 
