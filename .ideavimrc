@@ -13,3 +13,7 @@ nnoremap Y y$
 noremap <CR> o<ESC>
 
 nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>
+
+let g:EasyMotion_override_acejump = 0
+let mapleader="'"
+set easymotion
