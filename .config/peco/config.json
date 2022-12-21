@@ -1,3 +1,4 @@
 {
-    "Layout": "bottom-up"
+    "Layout": "bottom-up",
+    "InitialFilter": "Fuzzy"
 }
