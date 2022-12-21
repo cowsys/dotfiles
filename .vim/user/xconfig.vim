@@ -1,3 +1,20 @@
+" reference: map-table from :h map-table
+" 							*map-table*
+"          Mode  | Norm | Ins | Cmd | Vis | Sel | Opr | Term | Lang | ~
+" Command        +------+-----+-----+-----+-----+-----+------+------+ ~
+" [nore]map      | yes  |  -  |  -  | yes | yes | yes |  -   |  -   |
+" n[nore]map     | yes  |  -  |  -  |  -  |  -  |  -  |  -   |  -   |
+" [nore]map!     |  -   | yes | yes |  -  |  -  |  -  |  -   |  -   |
+" i[nore]map     |  -   | yes |  -  |  -  |  -  |  -  |  -   |  -   |
+" c[nore]map     |  -   |  -  | yes |  -  |  -  |  -  |  -   |  -   |
+" v[nore]map     |  -   |  -  |  -  | yes | yes |  -  |  -   |  -   |
+" x[nore]map     |  -   |  -  |  -  | yes |  -  |  -  |  -   |  -   |
+" s[nore]map     |  -   |  -  |  -  |  -  | yes |  -  |  -   |  -   |
+" o[nore]map     |  -   |  -  |  -  |  -  |  -  | yes |  -   |  -   |
+" t[nore]map     |  -   |  -  |  -  |  -  |  -  |  -  | yes  |  -   |
+" l[nore]map     |  -   | yes | yes |  -  |  -  |  -  |  -   | yes  |
+
+
 """ basic setting {{{
 colorscheme molokai
 syntax on
@@ -5,6 +22,7 @@ set nu
 set autoindent
 set hlsearch
 set cursorline
+set tildeop " ~ behaves as an operator
 
 filetype on
 
@@ -12,41 +30,32 @@ set expandtab
 set ts=4
 set shiftwidth=4
 
+" open new window on right side
+set splitright
+
 set nobackup
 set noswapfile
 
-" omni補完を有効にする
-set omnifunc=syntaxcomplete#Complete
-" omni詳細な補完内容を表示
-set completeopt=menu,preview
+set history=10000
+
+" " omni補完を有効にする
+" set omnifunc=syntaxcomplete#Complete
+" " omni詳細な補完内容を表示
+" set completeopt=menu,preview
 
 """ undoファイルを作成しないようにする (http://www.kaoriya.net/blog/2014/03/30/) {{{
 :set noundofile
 """ }}}
 
-" nnoremap q :<C-u>q<CR>
-" nnoremap Q q
+" let mapleader="\<Space>"
 
 noremap ; :
 noremap : ;
 """ }}}
 
-""" status line {{{
-" モードの違いをステータスライン色で表現
-au InsertEnter * hi StatusLine guifg=DarkBlue guibg=DarkYellow gui=none ctermfg=Blue ctermbg=Yellow cterm=none
-au InsertLeave * hi StatusLine guifg=DarkBlue guibg=DarkGray   gui=none ctermfg=Blue ctermbg=Yellow cterm=none
-
-" ステータスラインに文字コードと改行コードを表示(http://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-japanese#TOC-7
-set laststatus=2
-set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=\ (%v,%l)/%L%8P\
-""" }}}
-
 """ keybinds {{{
-" ノーマルモートでもエンターキーで改行を挿入(http://blog.blueblack.net/item_317) {{{
+" ノーマルモートでもエンターキーで改行を挿入(http://blog.blueblack.net/item_317)
 noremap <CR> o<ESC>
-
-" tabを開く
-"ca tt tabnew
 
 " 検索時にカーソル移動しない(https://ysano2005.hatenadiary.org/entry/20070313/1173770637)
 nmap * *N
@@ -65,29 +74,46 @@ nmap <Space>m <Plug>(quickhl-manual-this)
 xmap <Space>m <Plug>(quickhl-manual-this)
 nmap <Space>M <Plug>(quickhl-manual-reset)
 xmap <Space>M <Plug>(quickhl-manual-reset)
+
+" change uppercase / lowercase
+" nnoremap <Leader>u gUiw
+" nnoremap <Leader>u guiw
+
+" open doc/tip.md
+" nnoremap <Leader>8 :e /Users/kaz/src/github.com/cowsys/docs/tips.md<CR>
+nnoremap <Leader>8 :e ~/src/github.com/cowsys/docs/tips.md<CR>
+
+
+"  easily Up/Down on the Command-Line mode
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 """ }}}
 
 
 """ for ctrlp(http://kien.github.com/ctrlp.vim/ {{{
 let g:ctrlp_map = '<c-k>'
-let g:ctrlp_extensions = ['dir']
+let g:ctrlp_extensions = ['dir', 'ghq', 'cd']
 let g:ctrlp_cmd = 'CtrlPCurWD'
+
+" use ctrlp-matchfuzzy as CtrlP matcher
+let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
 
 " カレントバッファのルートディレクトリを基準に検索
 nnoremap <C-l> :CtrlPRoot<Esc>
 
 " ignore dirs
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|cloud.google.com|github.com|goji.io|golang.org|google.golang.org|googlemaps.github.io)$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules)$'
 """ }}}
+
 
 """ for fugitive(http://vim-users.jp/2011/06/hack219/) {{{
 nnoremap <Space>gd :<C-u>Gvdiff<Enter>
-nnoremap <Space>gs :<C-u>Gstatus<Enter>
-nnoremap <Space>gl :<C-u>Glog<Enter>
-nnoremap <Space>ga :<C-u>Gwrite<Enter>
-nnoremap <Space>gc :<C-u>Gcommit<Enter>
-nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
-nnoremap <Space>gb :<C-u>Gblame<Enter>
+nnoremap <Space>gs :<C-u>Git<Enter>
+nnoremap <Space>gl :<C-u>Git log<Enter>
+" nnoremap <Space>ga :<C-u>Gwrite<Enter>
+nnoremap <Space>gc :<C-u>Git commit<Enter>
+" nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
+nnoremap <Space>gb :<C-u>Git blame<Enter>
 
 " vertical diffをデフォルトで利用する(https://github.com/tpope/vim-fugitive/issues/508)
 set diffopt+=vertical
@@ -98,59 +124,32 @@ autocmd FileType git :setlocal foldlevel=99
 """ }}}
 
 
-""""""for quickrun {{{
-""" quickrun*vimproc(http://d.hatena.ne.jp/osyo-manga/20130311/1363012363) {{{
-" runner/vimproc/updatetime で出力バッファの更新間隔をミリ秒で設定できます
-" updatetime が一時的に書き換えられてしまうので注意して下さい
-let g:quickrun_config = {
-\   "_" : {
-\       "runner" : "vimproc",
-\       "runner/vimproc/updatetime" : 60
-\   },
-\}
+"""for quickrun {{{
+" remap Leader&QuickRun
+nnoremap <Leader>r :QuickRun<CR>
+" let g:quickrun_config = {}
+" let g:quickrun_config.go = {
+"     \'command': 'go',
+" \}
+" let g:quickrun_config.vim = {
+"     \'command': 'vim',
+" \}
 """ }}}
-
-""" quickrun*go{{{
-let g:quickrun_config.go = {
-    \'command': 'go',
-\}
-""" }}}
-"""""" }}}
-
-
-""" for vim-go(https://github.com/fatih/vim-go) {{{
-display auto type info
-let g:go_auto_type_info = 1
-let g:go_metalinter_autosave = 1
-let g:go_metalinter_autosave_enabled = ['vet']
-""" }}}
-
-""" for syntastic*go lint check(https://github.com/fatih/vim-go "using with syntastic") {{{
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:go_fmt_command = "goimports"
-""" }}}
-
-"""" highlight err(http://yuroyoro.hatenablog.com/entry/2014/08/12/144157) {{{
-"autocmd FileType go :highlight goErr cterm=bold ctermfg=214
-"autocmd FileType go :match goErr /\<err\>/
-"""" }}}
-"""" highlight channels {{{
-"autocmd FileType go :highlight goChan cterm=bold ctermfg=214
-"autocmd FileType go :match goChan /\<\<-\>/
-"""" }}}
-
 
 """ for vim-easymotion(http://blog.remora.cx/2012/08/vim-easymotion.html {{{
-" ホームポジションに近いキーを使う
-let g:EasyMotion_keys='hjlasdfgyuiopqwertnmzxcvbHJKLASDFGYUIOPQWERTNMZXCVBk'
-" 「'」 + 何かにマッピング
+let g:EasyMotion_keys='hjklasdfgyuiopqwertnmzxcvb'
 let g:EasyMotion_leader_key="'"
 " 1 ストローク選択を優先する
 let g:EasyMotion_grouping=1
 " カラー設定変更
 hi EasyMotionTarget ctermbg=none ctermfg=red
 hi EasyMotionShade  ctermbg=none ctermfg=blue
+
+" " use default f/F, t/T with EasyMotion
+" nmap f <Plug>(easymotion-f)
+" nmap F <Plug>(easymotion-F)
+" nmap t <Plug>(easymotion-t)
+" nmap T <Plug>(easymotion-T)
 """ }}}
 
 """ for japanese input(https://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-japanese/ime-control) {{{
@@ -187,10 +186,6 @@ augroup vimrcEx
 augroup END
 """ }}}
 
-""" tagbar toggle(https://github.com/majutsushi/tagbar) {{{
-nnoremap <Space>f :<C-u>TagbarToggle<CR>
-""" }}}
-
 """ () {{{
 " 1 : QuickFix/ロケーションリストの両方で有効
 let QFixWin_EnableMode = 1
@@ -198,13 +193,16 @@ let QFixWin_EnableMode = 1
 let QFix_UseLocationList = 0
 """ }}}
 
-""" for switch(https://github.com/AndrewRadev/switch.vim) {{{
-let g:switch_mapping = "-"
-""" }}}
+" """ for switch(https://github.com/AndrewRadev/switch.vim) {{{
+" let g:switch_mapping = "-"
+" """ }}}
 
 """ (previm) {{{
+" extension of plantuml file is needed to be *.md
 au BufRead,BufNewFile *.md set filetype=markdown
 let g:previm_open_cmd = 'open -a Google\ Chrome'
+
+au FileType *.plantuml command! OpenUml :!open -a Google\ Chrome %
 """ }}}
 
 """ yaml indent() {{{
@@ -219,30 +217,11 @@ if executable('jq')
   command! -bar -nargs=? Jq  call s:jq(<f-args>)
 endif
 
-""" (enable golsp) {{{
-let g:lsp_async_completion = 1
-
-if executable('golsp')
-  augroup LspGo
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'go-lang',
-        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
-        \ 'whitelist': ['go'],
-        \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
-  augroup END
-endif
-""" }}}
-
-""" preview plantuml {{{
-au FileType plantuml command! OpenUml :!open -a Google\ Chrome %
-""" }}}
-
-
 
 """ for nvim {{{
 if has('nvim')
+    set clipboard+=unnamedplus
+
     tnoremap <Esc> <C-\><C-n>
     tnoremap <C-v><Esc> <Esc>
 
@@ -251,7 +230,222 @@ if has('nvim')
 endif
 """ }}}
 
+""" (https://github.com/img-paste-devs/img-paste.vim) {{{
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+" autocmd FileType markdown nmap <buffer><silent> <leader>x :echo g:mapleader
+" nnoremap <Leader>r :QuickRun<CR>
+" there are some defaults for image directory and image name, you can change them
+" let g:mdip_imgdir = 'img'
+" let g:mdip_imgname = 'image'
+""" }}}
 
+""" (vim-lsp) {{{
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  nmap <buffer> <f2> <plug>(lsp-rename)
+
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> gs <plug>(lsp-document-symbol-search)
+  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+  nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> gi <plug>(lsp-implementation)
+  " nmap <buffer> gt <plug>(lsp-type-definition)
+  nmap <buffer> <leader>rn <plug>(lsp-rename)
+  nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+  nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+  nmap <buffer> <c-j> <plug>(lsp-hover)
+  " nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+  " nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+  inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
+endfunction
+
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/log/lsp.log')
+
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 0
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_virtual_text_enabled=0
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_completeopt = 1
+let g:asyncomplete_popup_delay = 200
+let g:lsp_text_edit_enabled = 1
+
+" Option + Enter -> exec :LspCodeAction such as fillstruct
+inoremap <Leader>f <Esc>:LspCodeAction<CR>
+""" }}}
+
+" """ (thinca/vim-ambicmd) {{{
+" cnoremap <expr> <Space> ambicmd#expand("\<Space>")
+" """ }}}
+
+""" (vim-vsnip) {{{
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" See https://github.com/hrsh7th/vim-vsnip/pull/50
+nmap        s   <Plug>(vsnip-select-text)
+xmap        s   <Plug>(vsnip-select-text)
+nmap        S   <Plug>(vsnip-cut-text)
+xmap        S   <Plug>(vsnip-cut-text)
+
+" " If you want to use snippet for multiple filetypes, you can `g:vsnip_filetypes` for it.
+" let g:vsnip_filetypes = {}
+" let g:vsnip_filetypes.javascriptreact = ['javascript']
+" let g:vsnip_filetypes.typescriptreact = ['typescript']
+""" }}}
+
+
+""" (sebdah/vim-delve) {{{
+nnoremap <Leader>dd :DlvDebug<CR>
+nnoremap <Leader>t :DlvTestCurrent<CR>
+nnoremap <Leader>c :DlvClearAll<CR>
+nnoremap <Leader>B :DlvToggleBreakpoint<CR>
+nnoremap <Leader>T :DlvToggleTracepoint<CR>
+""" }}}
+
+""" (itchyny/lightline.vim) {{{
+" get rid of messages like "-- INSERT --"
+set noshowmode
+
+" show lsp's diagnostics summary(https://kitagry.github.io/blog/programmings/2020/08/lightline-vim-lsp/)
+function! LightlineLSPWarnings() abort
+  " let l:counts = lsp#ui#vim#diagnostics#get_buffer_diagnostics_counts()
+  let l:counts = lsp#get_buffer_diagnostics_counts()
+  return l:counts.warning == 0 ? '' : printf('W:%d', l:counts.warning)
+endfunction
+
+function! LightlineLSPErrors() abort
+  " let l:counts = lsp#ui#vim#diagnostics#get_buffer_diagnostics_counts()
+  let l:counts = lsp#get_buffer_diagnostics_counts()
+  return l:counts.error == 0 ? '' : printf('E:%d', l:counts.error)
+endfunction
+
+function! LightlineLSPOk() abort
+  let l:counts = lsp#get_buffer_diagnostics_counts()
+  let l:total = l:counts.error + l:counts.warning
+  return l:total == 0 ? 'OK' : ''
+endfunction
+
+augroup LightLineOnLSP
+  autocmd!
+  autocmd User lsp_diagnostics_updated call lightline#update()
+augroup END
+
+let g:lightline = {
+  \ 'colorscheme': 'powerline',
+  \ 'active': {
+  \   'left': [
+  \     [ 'mode', 'paste' ],
+  \     [ 'readonly', 'filename', 'modified' ],
+  \     [ 'lsp_errors', 'lsp_warnings', 'lsp_ok' ],
+  \     [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
+  \   ],
+  \   'right': [
+  \     [ 'lineinfo' ],
+  \     [ 'percent' ],
+  \     [ 'fileformat', 'fileencoding', 'filetype'  ],
+  \   ],
+  \ },
+  \ 'inactive': {
+  \   'left': [
+  \     [ 'filename' ]
+  \   ],
+  \   'right': [
+  \     [ 'lineinfo' ],
+  \     [ 'percent' ]
+  \   ],
+  \ },
+  \ 'tabline': {
+  \ 'left': [ [ 'tabs' ] ],
+  \ 'right': [ [ 'close' ] ]
+  \ },
+  \ 'component_expand': {
+  \   'lsp_warnings': 'LightlineLSPWarnings',
+  \   'lsp_errors':   'LightlineLSPErrors',
+  \   'lsp_ok':       'LightlineLSPOk',
+  \   'linter_checking': 'lightline#ale#checking',
+  \   'linter_infos': 'lightline#ale#infos',
+  \   'linter_warnings': 'lightline#ale#warnings',
+  \   'linter_errors': 'lightline#ale#errors',
+  \   'linter_ok': 'lightline#ale#ok',
+  \ },
+  \ 'component_type': {
+  \   'lsp_warnings': 'warning',
+  \   'lsp_errors':   'error',
+  \   'lsp_ok':       'middle',
+  \   'linter_checking': 'right',
+  \   'linter_infos': 'right',
+  \   'linter_warnings': 'warning',
+  \   'linter_errors': 'error',
+  \   'linter_ok': 'right',
+  \ },
+  \ 'mode_map': {
+    \ 'n' : 'N',
+    \ 'i' : 'I',
+    \ 'R' : 'R',
+    \ 'v' : 'V',
+    \ 'V' : 'VL',
+    \ "\<C-v>": 'VB',
+    \ 'c' : 'C',
+    \ 's' : 'S',
+    \ 'S' : 'SL',
+    \ "\<C-s>": 'SB',
+    \ 't': 'TTT',
+    \ },
+\ }
+
+""" }}}
+
+" """ from modern vim(terminal/window-switching.vim) {{{
+" nnoremap <M-h> <c-w>h
+" nnoremap <M-j> <c-w>j
+" nnoremap <M-k> <c-w>k
+" nnoremap <M-l> <c-w>l
+" if has('nvim')
+"     tnoremap <M-h> <c-\><c-n><c-w>h
+"     tnoremap <M-j> <c-\><c-n><c-w>j
+"     tnoremap <M-k> <c-\><c-n><c-w>k
+"     tnoremap <M-l> <c-\><c-n><c-w>l
+" endif
+" """ }}}
+
+""" 行末のスペースを明示的に表示(from vim-technique bible: 1-11) {{{
+scriptencoding utf-8
+augroup highlightIdeographicSpace
+    autocmd!
+    autocmd ColorScheme * highlight IdeographicSpace term=underline ctermbg=Magenta
+    autocmd VimEnter,WinEnter * match IdeographicSpace / $/
+augroup END
+colorscheme molokai
+""" }}}
+
+""" kickdict.vim {{{
+nnoremap <Leader>d <Esc>:KickDict<CR>
+vnoremap <Leader>d <Esc>:KickDictVisually<CR>
+""" }}}
+
+""" translate.vim {{{
+vnoremap <Leader>t <Esc>:Translate<CR>
+""" }}}
 
 """ (template) {{{
 """ }}}
