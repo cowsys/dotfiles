@@ -1,0 +1,253 @@
+{
+	"Variable declaration :=": {
+		"scope": "go",
+		"prefix": "vv",
+		"body": [
+			"${1:name} := ${2:value}"
+		],
+		"description": "Variable declaration :="
+	},
+	"const": {
+		"scope": "go",
+		"prefix": "con",
+		"body": [
+			"const (",
+			"   $1 = $2",
+			")"
+		],
+		"description": "const"
+	},
+	"cmpdiff": {
+		"scope": "go",
+		"prefix": "cmp",
+		"body": [
+			"if diff := cmp.Diff(tt.want, got); diff != \"\" {",
+			"    t.Errorf(\"$1 result didn't match (-want / +got)\\n%s\", diff)",
+			"}"
+		],
+		"description": "cmpdiff"
+	},
+	"cmpdiff2": {
+		"scope": "go",
+		"prefix": "cmp2",
+		"body": [
+			"if diff := cmp.Diff(tt.want, got, protocmp.Transform()); diff != \"\" {",
+			"    t.Errorf(\"$1 result didn't match (-want / +got)\\n%s\", diff)",
+			"}"
+		],
+		"description": "cmpdiff2"
+	},
+	"context": {
+		"scope": "go",
+		"prefix": "ctx",
+		"body": [
+			"ctx := context.Background()"
+		],
+		"description": "context"
+	},
+	"input dummy time": {
+		"scope": "go",
+		"prefix": "dt",
+		"body": [
+			"time.Date(2021, 1, 2, 3, 4, 5, 6, time.UTC)"
+		],
+		"description": "input dimmy time"
+	},
+	"if error": {
+		"scope": "go",
+		"prefix": "err",
+		"body": [
+			"if $1 != nil {",
+			"    $2",
+			"}"
+		],
+		"description": "if error"
+	},
+	"indexed for loop": {
+		"scope": "go",
+		"prefix": "fori",
+		"body": [
+			"for $1 := 0; $2 < $3; $4++ {",
+			"    $5",
+			"}"
+		],
+		"description": "indexed for loop"
+	},
+	"for range loop": {
+		"scope": "go",
+		"prefix": "forr",
+		"body": [
+			"for $2, $3 := range $1 {",
+			"    $4",
+			"}"
+		],
+		"description": "for range loop"
+	},
+	"go func": {
+		"scope": "go",
+		"prefix": "gof",
+		"body": [
+			"go func() {",
+			"    $1",
+			"}()"
+		],
+		"description": "go func"
+	},
+	"import declaration": {
+		"scope": "go",
+		"prefix": "imports",
+		"body": [
+			"import (",
+			"    \"$1\"",
+			")"
+		],
+		"description": "import declaration"
+	},
+	"Iota constant declaration": {
+		"scope": "go",
+		"prefix": "iota",
+		"body": [
+			"const ${1:name} ${2:type} = iota"
+		],
+		"description": "iota constant declaration"
+	},
+	"Main function": {
+		"scope": "go",
+		"prefix": "main",
+		"body": [
+			"func main() {",
+			"    $1",
+			"}"
+		],
+		"description": "Main function"
+	},
+	"Map type": {
+		"scope": "go",
+		"prefix": "map",
+		"body": [
+			"map[$1]$2"
+		],
+		"description": "Map type"
+	},
+	"Method": {
+		"scope": "go",
+		"prefix": "meth",
+		"body": [
+			"func ($1 $2) $3($4) $5 {",
+			"    $6",
+			"}"
+		],
+		"description": "Method"
+	},
+	"panic": {
+		"scope": "go",
+		"prefix": "omg",
+		"body": [
+			"panic(\"oh my god!\")"
+		],
+		"description": "panic"
+	},
+	"Package delcaration": {
+		"scope": "go",
+		"prefix": "p",
+		"body": [
+			"package $1"
+		],
+		"description": "Package declaration"
+	},
+	"fmt.Println()": {
+		"scope": "go",
+		"prefix": "pl",
+		"body": [
+			"fmt.Println(\"$1\")"
+		],
+		"description": "fmt.Println()"
+	},
+	"fmr.Printf()": {
+		"scope": "go",
+		"prefix": "pf",
+		"body": [
+			"fmt.Printf(\"$1\",$2)"
+		],
+		"description": "fmr.Printf()"
+	},
+	"dump var": {
+		"scope": "go",
+		"prefix": "dp",
+		"body": [
+			"fmt.Printf(\"%#v\",$1)"
+		],
+		"description": "fmr.Printf()"
+	},
+	"print Hello, World!": {
+		"scope": "go",
+		"prefix": "hw",
+		"body": [
+			"fmt.Println(\"Hello, World!\")"
+		],
+		"description": "print Hello, World!"
+	},
+	"select with chan": {
+		"scope": "go",
+		"prefix": "selc",
+		"body": [
+			"select {",
+			"case v1 := <-ch1:",
+			"    fmt.Println(v1)",
+			"case v2 := <-ch2:",
+			"    fmt.Println(v2)",
+			"}"
+		],
+		"description": "select"
+	},
+	"test function": {
+		"scope": "go",
+		"prefix": "test",
+		"body": "func Test$1(t *testing.T) {\n\ttype args struct {\n\t\t$0\n\t}\n\ttests := map[string]struct {\n\t\targs\targs\n\t\twant\tint\n\t\twantErr bool\n\t}{\n\t\t\"OK: \": {\n\t\t\targs: args{\n\t\t\t},\n\t\t\twant:\t0,\n\t\t\twantErr: false,\n\t\t},\n\t}\n\tfor testname, tt := range tests {\n\t\tt.Run(testname, func(t *testing.T) {\n\t\t\tgot, err := ${2:funcname}(tt.args.)\n\t\t\tif (err != nil) != tt.wantErr {\n\t\t\t\tt.Errorf(\"${2:funcname}() error = %v, wantErr %v\", err, tt.wantErr)\n\t\t\t\treturn\n\t\t\t}\n\t\t\tif diff := cmp.Diff(tt.want, got); diff != \"\" {\n\t\t\t\tt.Errorf(\"${2:funcname}() result didn't match (-want / +got)\\n%s\", diff)\n\t\t\t}\n\t\t})\n\t}\n}",
+		"description": "Snippet for Test function"
+	},
+	"Types declaration": {
+		"scope": "go",
+		"prefix": "types",
+		"body": [
+			"type (",
+			"    $1",
+			")"
+		],
+		"description": "Types declaration"
+	},
+	"Variables declaration": {
+		"scope": "go",
+		"prefix": "vars",
+		"body": [
+			"var (",
+			"    $1 = $2",
+			")"
+		],
+		"description": "Variables declaration"
+	},
+	"json struct tag": {
+		"scope": "go",
+		"prefix": "json",
+		"body": [
+			"`json:\"$1\"`"
+		],
+		"description": "json struct tag"
+	},
+	"spanner struct tag": {
+		"scope": "go",
+		"prefix": "sp",
+		"body": [
+			"`spanner:\"$1\"`"
+		],
+		"description": "spanner struct tag"
+	},
+	"xml struct tag": {
+		"scope": "go",
+		"prefix": "xml",
+		"body": [
+			"`xml:\"$1\"`"
+		],
+		"description": "xml struct tag"
+	}
+}

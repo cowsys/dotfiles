@@ -28,3 +28,4 @@ if [ ! -d "$HOME/.vim" ]; then
 fi
 # link .vim/pack
 link .vim/user
+link .vsnip
