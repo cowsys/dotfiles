@@ -1,0 +1,5 @@
+display_charset UTF-8
+document_charset UTF-8
+system_charset UTF-8
+
+anchor_color red # color of link
