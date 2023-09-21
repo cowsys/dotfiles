@@ -17,6 +17,12 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 source /usr/local/opt/spaceship/spaceship.zsh
 
+
+# paths for popular directries
+export V=~/.vim/pack/devplugins/start
+export G=~/src/github.com/cowsys
+
+
 # alias setting
 alias ls="ls -G -w"
 alias ll="ls -la"
