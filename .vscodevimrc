@@ -1,0 +1,21 @@
+set hlsearch
+set wrap
+
+nnoremap q :<C-u>q<CR>
+nnoremap Q q
+
+noremap ; :
+noremap : ;
+
+nnoremap Y y$
+
+noremap <CR> o<ESC>
+
+nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>
+nnoremap <Leader>U gUiw
+
+let mapleader="\<Space>"
+
+" let g:EasyMotion_override_acejump = 0
+" let mapleader="'"
+" set easymotion
