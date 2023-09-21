@@ -20,6 +20,7 @@ link .tmux.conf
 link .vimrc
 link .xvimrc
 link .zshrc
+link .vscodevimrc
 
 ## dirctories
 link .config
@@ -28,4 +29,6 @@ if [ ! -d "$HOME/.vim" ]; then
 fi
 # link .vim/pack
 link .vim/user
+link .w3m
 link .vsnip
+link .hammerspoon
