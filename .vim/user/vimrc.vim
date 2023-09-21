@@ -16,7 +16,8 @@
 
 
 """ basic setting {{{
-colorscheme molokai
+" colorscheme molokai
+colorscheme solarized
 syntax on
 set nu
 set autoindent
@@ -48,9 +49,11 @@ set history=10000
 """ }}}
 
 " let mapleader="\<Space>"
+let mapleader="'"
 
 noremap ; :
 noremap : ;
+noremap <BS> x
 """ }}}
 
 """ keybinds {{{
@@ -79,10 +82,30 @@ xmap <Space>M <Plug>(quickhl-manual-reset)
 " nnoremap <Leader>u gUiw
 " nnoremap <Leader>u guiw
 
-" open doc/tip.md
-" nnoremap <Leader>8 :e /Users/kaz/src/github.com/cowsys/docs/tips.md<CR>
-nnoremap <Leader>8 :e ~/src/github.com/cowsys/docs/tips.md<CR>
+nnoremap <Leader><F1> :W3m https://docs.oracle.com/javase/tutorial/reallybigindex.html<CR>
+nnoremap <Leader>j5   :W3m https://www.scala-lang.org/<CR>
+nnoremap <Leader>j6   :W3m https://debian-handbook.info/browse/stable/<CR>
+nnoremap <Leader>j7   :W3m https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html<CR>
+nnoremap <Leader>j8   :W3m https://www.google.com/?hl=en<CR>
+nnoremap <Leader>j9   :e ~/src/github.com/cowsys/docs/gnu-c-language-manual.pdf<CR>
+nnoremap <Leader>; zb
 
+nnoremap <Leader>2 :e ~/src/github.com/cowsys/docs/tour-of-go-merged-articles<CR>
+nnoremap <Leader>3 :e ~/ro-src/go.googlesource.com/go/src<CR>
+nnoremap <Leader>4 :e ~/src/github.com/cowsys/docs/go-all-source<CR>
+nnoremap <Leader>5 :W3m https://gobyexample.com/<CR>
+" nnoremap <Leader>4 :e ~/src/github.com/cowsys/docs/go-all-tests<CR>
+nnoremap <Leader>6 :W3m https://golang.org/<CR>
+
+" open doc/tip.md
+nnoremap <Leader>7 :e ~/src/github.com/cowsys/docs/<CR>
+" open go specification
+nnoremap <Leader>8 :W3m https://go.dev/ref/spec<CR>
+nnoremap <Leader>9 :e ~/src/github.com/cowsys/docs/Go Programming Language.pdf<CR>
+
+nnoremap <Leader>4 :e ~/src/github.com/cowsys/docs/godoc-output-all<CR>
+" add markdown's heading with date
+:noremap! <F9> # <ESC>:execute 'normal a'.strftime('%Y/%m/%d %H%M').': '<CR>a
 
 "  easily Up/Down on the Command-Line mode
 cnoremap <C-p> <Up>
@@ -126,7 +149,7 @@ autocmd FileType git :setlocal foldlevel=99
 
 """for quickrun {{{
 " remap Leader&QuickRun
-nnoremap <Leader>r :QuickRun<CR>
+nnoremap <Leader>r :w<CR> :QuickRun<CR>
 " let g:quickrun_config = {}
 " let g:quickrun_config.go = {
 "     \'command': 'go',
@@ -160,7 +183,32 @@ let IM_CtrlMode = 4
 """  }}}
 
 """ vim-smartchr(http://d.hatena.ne.jp/ampmmn/20080925/1222338972 {{{
-inoremap <expr> ; smartchr#one_of(';', ' := ')
+" for right side keys
+" inoremap <expr> u smartchr#one_of('u', 'uu', '-', '_')
+" inoremap <expr> i smartchr#one_of('i', 'ii', '=', '+')
+inoremap <expr> j smartchr#one_of('j', 'jj', '[]')
+inoremap <expr> k smartchr#one_of('k', 'kk', '{}')
+" inoremap <expr> l smartchr#one_of('l', 'll', '\', '\|')
+" inoremap <expr> m smartchr#one_of('m', 'mm', '''', '"')
+
+inoremap <expr> ; smartchr#one_of(';' , '\n', '⛔️ ', ' ✅ ', ' ⚠️ ')
+
+inoremap <expr> , smartchr#one_of(',', '=', ':=')
+inoremap <expr> . smartchr#one_of('.', '==', '!=')
+
+" for left side keys
+inoremap <expr> f smartchr#one_of('f', 'ff', '`', '~')
+""" }}}
+
+""" AndrewRadev/switch.vim {{{
+
+" 以下のswitch_mapping設定はうまく動かないので大本のpluginのnmapを実行
+" let g:switch_mapping = "="
+nmap = <Plug>(Switch)
+let g:switch_custom_definitions =
+    \ [
+    \   ['⛔️', '✅', '⚠️']
+    \ ]
 """ }}}
 
 """ qfixgrep(https://sites.google.com/site/fudist/Home/grep/usage) {{{
@@ -239,11 +287,28 @@ autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownCli
 " let g:mdip_imgname = 'image'
 """ }}}
 
+""" (sebdah/vim-delve) {{{
+nnoremap <Leader>d :DlvDebug<CR>
+nnoremap <Leader>g :DlvTestCurrent<CR>
+" nnoremap <Leader>c :DlvClearAll<CR>
+nnoremap <Leader>dd :DlvToggleBreakpoint<CR>
+nnoremap <Leader>ddd :DlvClearAll<CR>
+nnoremap <Leader>T :DlvToggleTracepoint<CR>
+""" }}}
+
+""" (buoto/gotests-vim) {{{
+nnoremap <Leader>gg :GoTests<CR>
+""" }}}
+""" (kyoh86/vim-go-coverage) {{{
+nnoremap <Leader>c  :GoCover<CR>
+nnoremap <Leader>cc :GoCoverClear<CR>
+""" }}}
+
 """ (vim-lsp) {{{
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
-  nmap <buffer> <f2> <plug>(lsp-rename)
+  " nmap <buffer> <f2> <plug>(lsp-rename)
 
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
   nmap <buffer> gd <plug>(lsp-definition)
@@ -255,6 +320,8 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> <leader>rn <plug>(lsp-rename)
   nmap <buffer> [g <plug>(lsp-previous-diagnostic)
   nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+  " nmap <buffer> gp <plug>(lsp-previous-error)
+  " nmap <buffer> gn <plug>(lsp-next-error)
   nmap <buffer> <c-j> <plug>(lsp-hover)
   " nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
   " nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
@@ -279,6 +346,14 @@ let g:lsp_text_edit_enabled = 1
 
 " Option + Enter -> exec :LspCodeAction such as fillstruct
 inoremap <Leader>f <Esc>:LspCodeAction<CR>
+""" }}}
+
+""" (dense-analysis/ale) {{{
+let g:ale_virtualtext_cursor = 'disabled'
+
+" inoremap <Leader>[ <Esc>:ALEPopulateLocList<CR>
+" inoremap <Leader>[ <Esc>:ALENextWrap<CR>
+" inoremap <Leader>] <Esc>:ALEPreviousWrap<CR>
 """ }}}
 
 " """ (thinca/vim-ambicmd) {{{
@@ -313,14 +388,6 @@ xmap        S   <Plug>(vsnip-cut-text)
 " let g:vsnip_filetypes.typescriptreact = ['typescript']
 """ }}}
 
-
-""" (sebdah/vim-delve) {{{
-nnoremap <Leader>dd :DlvDebug<CR>
-nnoremap <Leader>t :DlvTestCurrent<CR>
-nnoremap <Leader>c :DlvClearAll<CR>
-nnoremap <Leader>B :DlvToggleBreakpoint<CR>
-nnoremap <Leader>T :DlvToggleTracepoint<CR>
-""" }}}
 
 """ (itchyny/lightline.vim) {{{
 " get rid of messages like "-- INSERT --"
@@ -435,16 +502,67 @@ augroup highlightIdeographicSpace
     autocmd ColorScheme * highlight IdeographicSpace term=underline ctermbg=Magenta
     autocmd VimEnter,WinEnter * match IdeographicSpace / $/
 augroup END
-colorscheme molokai
 """ }}}
 
 """ kickdict.vim {{{
-nnoremap <Leader>d <Esc>:KickDict<CR>
-vnoremap <Leader>d <Esc>:KickDictVisually<CR>
+nnoremap <Leader>ttt <Esc>:KickDict<CR>
+" vnoremap <Leader>ttt <Esc>:KickDictVisually<CR>
 """ }}}
 
 """ translate.vim {{{
 vnoremap <Leader>t <Esc>:Translate<CR>
+""" }}}
+
+""" pronunplayer.vim {{{
+nnoremap <Leader>ee <Esc>:KickPronunPlayer<CR>
+""" }}}
+
+""" british-pronunciations-vim {{{
+nnoremap <Leader>e <Esc>:EchoPronuns<CR>
+""" }}}
+
+""" maximize window {{{
+" # reference document
+" :res[ize] [N]
+" CTRL-W CTRL-_					*CTRL-W_CTRL-_* *CTRL-W__*
+" CTRL-W _	Set current window height to N (default: highest possible).
+
+" nnoremap <Leader>ee <Esc>:res 100<CR>
+""" }}}
+
+
+""" open selected URL by W3m(depends on mattn/vim-textobj-url) {{{
+function! Open_selected_url_by_w3m() abort
+    normal! gv""y
+    let url = @"
+    execute "sp"
+    let run_command = 'term w3m "' . url . '"'
+    execute run_command
+endfunction
+
+vnoremap <Leader>ww <Esc>:call Open_selected_url_by_w3m()<CR>
+""" }}}
+
+
+""" surround with ``` {{{
+autocmd FileType * let b:surround_96 = "```\n\r\n```"
+autocmd FileType make let b:surround_96 = "```\n\r\n```"
+""" }}}
+
+
+""" mattn/vim-goimports {{{
+let g:goimports_show_loclist = 0
+""" }}}
+
+
+""" yoshida-m-3/vim-im-select {{{
+let g:im_select_default = 'com.google.inputmethod.Japanese.Roman'
+let g:im_select_enable_focus_events = 0
+""" }}}
+
+
+""" https://github.com/rhysd/vim-clang-format {{{
+autocmd FileType c ClangFormatAutoEnable
 """ }}}
 
 """ (template) {{{

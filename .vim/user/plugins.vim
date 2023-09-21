@@ -17,7 +17,8 @@ call minpac#add('thinca/vim-quickrun')
 " call minpac#add('Shougo/vimproc.vim', {'do': 'silent! !make'})
 
 " display
-call minpac#add('fatih/molokai')
+" call minpac#add('fatih/molokai')
+call minpac#add('altercation/vim-colors-solarized')
 call minpac#add('itchyny/lightline.vim')
 " call minpac#add('mattn/emoji-vim')
 call minpac#add('kannokanno/previm')
@@ -67,6 +68,11 @@ call minpac#add('kana/vim-textobj-user')
 call minpac#add('kana/vim-textobj-function')
 call minpac#add('kana/vim-textobj-entire')
 call minpac#add('kana/vim-textobj-line')
+call minpac#add('saaguero/vim-textobj-pastedtext')
+call minpac#add('fvictorio/vim-textobj-backticks')
+call minpac#add('mattn/vim-textobj-url')
+call minpac#add('thinca/vim-textobj-between')
+
 
 " git
 call minpac#add('tpope/vim-fugitive')
@@ -75,8 +81,19 @@ call minpac#add('gregsexton/gitv')
 
 " langs
 call minpac#add('thinca/vim-themis')
-" call minpac#add('fatih/vim-go')
 call minpac#add('mattn/vim-goimports')
+call minpac#add('buoto/gotests-vim')
 call minpac#add('sebdah/vim-delve')
+call minpac#add('kyoh86/vim-go-coverage')
+call minpac#add('rhysd/vim-clang-format')
 
 " call minpac#add('thinca/vim-ambicmd')
+call minpac#add('vim-scripts/ManPageView')
+call minpac#add('HiPhish/info.vim')
+call minpac#add('yuratomo/w3m.vim')
+call minpac#add('rhysd/clever-f.vim')
+
+call minpac#add('makerj/vim-pdf')
+" call minpac#add('ellisonleao/glow.nvim', {'type': 'opt'})
+call minpac#add('yoshida-m-3/vim-im-select')
+" call minpac#add('thinca/vim-ref')
