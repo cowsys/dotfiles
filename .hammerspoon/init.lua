@@ -112,15 +112,15 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "=", function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
 
-  f.y = f.y - 20
-  f.h = f.h + 20
+  f.y = f.y - 550
+  f.h = f.h + 550
   win:setFrame(f)
 end)
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "-", function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
 
-  f.y = f.y + 20
-  f.h = f.h - 20
+  f.y = f.y + 550
+  f.h = f.h - 550
   win:setFrame(f)
 end)
