@@ -565,5 +565,11 @@ let g:im_select_enable_focus_events = 0
 autocmd FileType c ClangFormatAutoEnable
 """ }}}
 
+""" scroll-cursor関係のkeyを覚えやすいように追加でmap定義 {{{
+nmap z, z<Enter> 
+"    z. の入力は覚えやすいので追加定義しない
+nmap z/ z-
+""" }}}
+
 """ (template) {{{
 """ }}}
