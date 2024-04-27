@@ -14,10 +14,10 @@ call minpac#add('easymotion/vim-easymotion')
 call minpac#add('fuenor/qfixgrep')
 call minpac#add('thinca/vim-qfreplace')
 call minpac#add('thinca/vim-quickrun')
-" call minpac#add('Shougo/vimproc.vim', {'do': 'silent! !make'})
+call minpac#add('vim-scripts/batch.vim')
 
 " display
-" call minpac#add('fatih/molokai')
+call minpac#add('fatih/molokai')
 call minpac#add('altercation/vim-colors-solarized')
 call minpac#add('itchyny/lightline.vim')
 " call minpac#add('mattn/emoji-vim')
@@ -36,7 +36,7 @@ call minpac#add('maximbaz/lightline-ale')
 call minpac#add('jceb/vim-hier') " Highlight quickfix errors
 
 " lsp
-call minpac#add('prabirshrestha/async.vim')
+"call minpac#add('prabirshrestha/async.vim')
 call minpac#add('prabirshrestha/asyncomplete.vim')
 call minpac#add('prabirshrestha/asyncomplete-lsp.vim')
 call minpac#add('prabirshrestha/vim-lsp')
@@ -59,8 +59,8 @@ call minpac#add('vim-scripts/Align')
 call minpac#add('tomtom/tcomment_vim')
 
 " operator
+call minpac#add('kana/vim-operator-user')
 " call minpac#add('osyo-manga/vim-operator-search')
-" call minpac#add('kana/vim-operator-user')
 " call minpac#add('kana/vim-operator-replace')
 
 " textobj
@@ -86,14 +86,20 @@ call minpac#add('buoto/gotests-vim')
 call minpac#add('sebdah/vim-delve')
 call minpac#add('kyoh86/vim-go-coverage')
 call minpac#add('rhysd/vim-clang-format')
+" call minpac#add('tpope/vim-dispatch')
 
 " call minpac#add('thinca/vim-ambicmd')
-call minpac#add('vim-scripts/ManPageView')
 call minpac#add('HiPhish/info.vim')
 call minpac#add('yuratomo/w3m.vim')
 call minpac#add('rhysd/clever-f.vim')
 
 call minpac#add('makerj/vim-pdf')
+" call minpac#add('vim-test/vim-test')
+
 " call minpac#add('ellisonleao/glow.nvim', {'type': 'opt'})
-call minpac#add('yoshida-m-3/vim-im-select')
+" call minpac#add('brglng/vim-im-select')
+" call minpac#add('yoshida-m-3/vim-im-select')
 " call minpac#add('thinca/vim-ref')
+
+
+packloadall

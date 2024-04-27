@@ -16,19 +16,24 @@
 
 
 """ basic setting {{{
-" colorscheme molokai
-colorscheme solarized
+colorscheme molokai
+"colorscheme solarized
+" colorscheme elflord
 syntax on
-set nu
+set number
 set autoindent
 set hlsearch
 set cursorline
 set tildeop " ~ behaves as an operator
+set visualbell
+
+set splitright
+set splitbelow
 
 filetype on
 
 set expandtab
-set ts=4
+set tabstop=4
 set shiftwidth=4
 
 " open new window on right side
@@ -36,6 +41,8 @@ set splitright
 
 set nobackup
 set noswapfile
+
+set smartcase
 
 set history=10000
 
@@ -57,6 +64,7 @@ noremap <BS> x
 """ }}}
 
 """ keybinds {{{
+
 " ノーマルモートでもエンターキーで改行を挿入(http://blog.blueblack.net/item_317)
 noremap <CR> o<ESC>
 
@@ -66,6 +74,9 @@ nmap # #N
 
 " Yで行末までコピー(http://ymizushi.hateblo.jp/entry/2012/11/18/232431)
 nnoremap Y y$
+
+" pasteしたテキストをvisual modeで選択(vim technique bible: 3-15)
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>
 nnoremap / :<C-u>set hlsearch<Return>/
@@ -78,40 +89,38 @@ xmap <Space>m <Plug>(quickhl-manual-this)
 nmap <Space>M <Plug>(quickhl-manual-reset)
 xmap <Space>M <Plug>(quickhl-manual-reset)
 
+map oxn <Plug>(operator-quickhl-manual-this-motion)
+
 " change uppercase / lowercase
 " nnoremap <Leader>u gUiw
 " nnoremap <Leader>u guiw
 
-nnoremap <Leader><F1> :W3m https://docs.oracle.com/javase/tutorial/reallybigindex.html<CR>
-nnoremap <Leader>j5   :W3m https://www.scala-lang.org/<CR>
-nnoremap <Leader>j6   :W3m https://debian-handbook.info/browse/stable/<CR>
-nnoremap <Leader>j7   :W3m https://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html<CR>
-nnoremap <Leader>j8   :W3m https://www.google.com/?hl=en<CR>
-nnoremap <Leader>j9   :e ~/src/github.com/cowsys/docs/gnu-c-language-manual.pdf<CR>
-nnoremap <Leader>; zb
-
-nnoremap <Leader>2 :e ~/src/github.com/cowsys/docs/tour-of-go-merged-articles<CR>
-nnoremap <Leader>3 :e ~/ro-src/go.googlesource.com/go/src<CR>
-nnoremap <Leader>4 :e ~/src/github.com/cowsys/docs/go-all-source<CR>
-nnoremap <Leader>5 :W3m https://gobyexample.com/<CR>
-" nnoremap <Leader>4 :e ~/src/github.com/cowsys/docs/go-all-tests<CR>
-nnoremap <Leader>6 :W3m https://golang.org/<CR>
-
-" open doc/tip.md
-nnoremap <Leader>7 :e ~/src/github.com/cowsys/docs/<CR>
-" open go specification
+nnoremap <Leader>7 :e ~/src/github.com/cowsys/docs/log.md<CR>
 nnoremap <Leader>8 :W3m https://go.dev/ref/spec<CR>
-nnoremap <Leader>9 :e ~/src/github.com/cowsys/docs/Go Programming Language.pdf<CR>
 
-nnoremap <Leader>4 :e ~/src/github.com/cowsys/docs/godoc-output-all<CR>
+" handle vim files
+nnoremap <Leader>v :e ~/.vim/user/vimrc.vim<CR>
+nnoremap <Leader>vv :e ~/.vim/user/plugins.vim<CR>
+nnoremap <Leader>vvv :source ~/.vim/user/vimrc.vim<CR>
+nnoremap <Leader>vvvv :source ~/.vim/user/plugins.vim<CR>
+nnoremap <Leader>vvvvv :e ~/.vim/<CR>
+
 " add markdown's heading with date
-:noremap! <F9> # <ESC>:execute 'normal a'.strftime('%Y/%m/%d %H%M').': '<CR>a
+:noremap! <Leader>` # <ESC>:execute 'normal a'.strftime('%Y/%m/%d %H%M').': '<CR>a
 
-"  easily Up/Down on the Command-Line mode
+
+" emacs like key binding on the Command-Line mode
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+cnoremap <C-a> <Home>
+cnoremap <C-f> <Right>
+cnoremap <C-b> <Left>
+" cnoremap <C-d> <Del>
 """ }}}
 
+" command mapping {{{
+command! E :Explore
+" }}}
 
 """ for ctrlp(http://kien.github.com/ctrlp.vim/ {{{
 let g:ctrlp_map = '<c-k>'
@@ -173,14 +182,19 @@ hi EasyMotionShade  ctermbg=none ctermfg=blue
 " nmap F <Plug>(easymotion-F)
 " nmap t <Plug>(easymotion-t)
 " nmap T <Plug>(easymotion-T)
-""" }}}
+"
+" configs for overwin
+nmap <Leader>f <Plug>(easymotion-overwin-f)
 
-""" for japanese input(https://sites.google.com/site/fudist/Home/vim-nihongo-ban/vim-japanese/ime-control) {{{
-" 「日本語入力固定モード」の動作モード
-let IM_CtrlMode = 4
-" 「日本語入力固定モード」切替キー
-"inoremap <silent> <C-j> <C-^><C-r>=IMState('FixMode')<CR>
-"""  }}}
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+nmap <Leader>j <Plug>(easymotion-overwin-line)
+
+" Move to word
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+""" }}}
 
 """ vim-smartchr(http://d.hatena.ne.jp/ampmmn/20080925/1222338972 {{{
 " for right side keys
@@ -209,6 +223,11 @@ let g:switch_custom_definitions =
     \ [
     \   ['⛔️', '✅', '⚠️']
     \ ]
+""" }}}
+
+""" AndrewRadev/switch.vim {{{
+" bool値上でminus押下でtrue/falseをtoggle
+let g:switch_reverse_mapping = '-'
 """ }}}
 
 """ qfixgrep(https://sites.google.com/site/fudist/Home/grep/usage) {{{
@@ -288,8 +307,9 @@ autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownCli
 """ }}}
 
 """ (sebdah/vim-delve) {{{
+let g:delve_new_command='new'
 nnoremap <Leader>d :DlvDebug<CR>
-nnoremap <Leader>g :DlvTestCurrent<CR>
+nnoremap <Leader>gg :DlvTestCurrent<CR> 
 " nnoremap <Leader>c :DlvClearAll<CR>
 nnoremap <Leader>dd :DlvToggleBreakpoint<CR>
 nnoremap <Leader>ddd :DlvClearAll<CR>
@@ -297,12 +317,18 @@ nnoremap <Leader>T :DlvToggleTracepoint<CR>
 """ }}}
 
 """ (buoto/gotests-vim) {{{
-nnoremap <Leader>gg :GoTests<CR>
+nnoremap <Leader>ggg :GoTests<CR>
+" let g:gotests_template_dir = '~/.config/gotests/templates/'
 """ }}}
 """ (kyoh86/vim-go-coverage) {{{
 nnoremap <Leader>c  :GoCover<CR>
 nnoremap <Leader>cc :GoCoverClear<CR>
 """ }}}
+
+
+" open test file of Go.{{{
+nnoremap <Leader>= :let filename=expand('%')<CR>:let filename=strpart(filename, 0, strridx(filename, '.')). '_test'. strpart(filename, strridx(filename, '.'))<CR>:echo filename<CR>:execute ':vnew '. filename<CR>
+" }}}
 
 """ (vim-lsp) {{{
 function! s:on_lsp_buffer_enabled() abort
@@ -316,13 +342,13 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
   nmap <buffer> gr <plug>(lsp-references)
   nmap <buffer> gi <plug>(lsp-implementation)
-  " nmap <buffer> gt <plug>(lsp-type-definition)
+  nmap <buffer> gx <plug>(lsp-type-definition)
   nmap <buffer> <leader>rn <plug>(lsp-rename)
   nmap <buffer> [g <plug>(lsp-previous-diagnostic)
   nmap <buffer> ]g <plug>(lsp-next-diagnostic)
   " nmap <buffer> gp <plug>(lsp-previous-error)
   " nmap <buffer> gn <plug>(lsp-next-error)
-  nmap <buffer> <c-j> <plug>(lsp-hover)
+  nmap <buffer> K <plug>(lsp-hover)
   " nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
   " nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
@@ -381,11 +407,6 @@ nmap        s   <Plug>(vsnip-select-text)
 xmap        s   <Plug>(vsnip-select-text)
 nmap        S   <Plug>(vsnip-cut-text)
 xmap        S   <Plug>(vsnip-cut-text)
-
-" " If you want to use snippet for multiple filetypes, you can `g:vsnip_filetypes` for it.
-" let g:vsnip_filetypes = {}
-" let g:vsnip_filetypes.javascriptreact = ['javascript']
-" let g:vsnip_filetypes.typescriptreact = ['typescript']
 """ }}}
 
 
@@ -506,7 +527,7 @@ augroup END
 
 """ kickdict.vim {{{
 nnoremap <Leader>ttt <Esc>:KickDict<CR>
-" vnoremap <Leader>ttt <Esc>:KickDictVisually<CR>
+vnoremap <Leader>ttt <Esc>:KickDictVisually<CR>
 """ }}}
 
 """ translate.vim {{{
@@ -514,11 +535,11 @@ vnoremap <Leader>t <Esc>:Translate<CR>
 """ }}}
 
 """ pronunplayer.vim {{{
-nnoremap <Leader>ee <Esc>:KickPronunPlayer<CR>
+nnoremap <Leader>eee <Esc>:KickPronunPlayer<CR>
 """ }}}
 
 """ british-pronunciations-vim {{{
-nnoremap <Leader>e <Esc>:EchoPronuns<CR>
+nnoremap <Leader>ee <Esc>:EchoPronuns<CR>
 """ }}}
 
 """ maximize window {{{
@@ -531,16 +552,25 @@ nnoremap <Leader>e <Esc>:EchoPronuns<CR>
 """ }}}
 
 
-""" open selected URL by W3m(depends on mattn/vim-textobj-url) {{{
+""" open selected URL by Chrome {{{
+function! Open_selected_url_by_chrome() abort
+    normal! "xyiW
+    let url = @x
+    let run_command = 'open -a \/Applications\/Google\ Chrome.app -g "' . url . '"'
+    call system(run_command)
+endfunction
+
+""" open selected URL by W3m {{{
 function! Open_selected_url_by_w3m() abort
-    normal! gv""y
-    let url = @"
+    normal! "xyiW
+    let url = @x
     execute "sp"
     let run_command = 'term w3m "' . url . '"'
     execute run_command
 endfunction
 
-vnoremap <Leader>ww <Esc>:call Open_selected_url_by_w3m()<CR>
+nnoremap <Leader>3  <Esc>:call Open_selected_url_by_chrome()<CR>
+nnoremap <Leader>33 <Esc>:call Open_selected_url_by_w3m()<CR>
 """ }}}
 
 
@@ -555,12 +585,6 @@ let g:goimports_show_loclist = 0
 """ }}}
 
 
-""" yoshida-m-3/vim-im-select {{{
-let g:im_select_default = 'com.google.inputmethod.Japanese.Roman'
-let g:im_select_enable_focus_events = 0
-""" }}}
-
-
 """ https://github.com/rhysd/vim-clang-format {{{
 autocmd FileType c ClangFormatAutoEnable
 """ }}}
@@ -569,6 +593,25 @@ autocmd FileType c ClangFormatAutoEnable
 nmap z, z<Enter> 
 "    z. の入力は覚えやすいので追加定義しない
 nmap z/ z-
+""" }}}
+
+
+
+""" can do test on project dirs wherever {{{
+" makeprg config specifying project root
+let projectRootEnvVar = getenv('PROJECT_ROOT')
+if !empty(projectRootEnvVar)
+    set makeprg=make\ -C\ $PROJECT_ROOT
+endif
+""" }}}
+
+""" toggle between wrapscan/smartcase and nowrapscan/ignorecase {{{
+nnoremap <Leader>s  <Esc>:set ignorecase<CR>:set nowrapscan<CR>
+nnoremap <Leader>ss <Esc>:set smartcase<CR>:set wrapscan<CR>
+""" }}}
+
+""" restart LSP server {{{
+nnoremap <Leader>sss  <Esc>:LspStopServer<CR>:e<CR>
 """ }}}
 
 """ (template) {{{
