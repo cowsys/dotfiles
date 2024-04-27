@@ -1,0 +1,37 @@
+{
+	"hammerspoon hs.alert.show": {
+		"scope": "lua",
+		"prefix": "al",
+		"body": [
+			"hs.alert.show(\"$1\")"
+		],
+		"description": "hammerspoon hs.alert.show"
+	},
+	"hammerspoon hs.logger.i()": {
+		"scope": "lua",
+		"prefix": "logger",
+		"body": [
+			"local logger=hs.logger.new('dummy', 'debug')",
+			"logger.i(\"$1\")"
+		],
+		"description": "hammerspoon hs.logger.i()"
+	},
+	"function": {
+		"scope": "lua",
+		"prefix": "func",
+		"body": [
+			"function()",
+			"    $1",
+			"end"
+		],
+		"description": "function"
+	},
+	"const": {
+		"scope": "lua",
+		"prefix": "const",
+		"body": [
+			"local $1<const> = $2"
+		],
+		"description": "const"
+	}
+}

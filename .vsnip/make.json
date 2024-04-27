@@ -1,0 +1,12 @@
+{
+	"PHONY target": {
+		"scope": "make",
+		"prefix": "ph",
+		"body": [
+			".PHONY: $1",
+			"$1:",
+			"\t$2"
+		],
+		"description": "PHONY target"
+	}
+}

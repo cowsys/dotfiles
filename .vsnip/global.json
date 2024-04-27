@@ -1,0 +1,10 @@
+{
+	"awk: use variable": {
+		"scope": "awk",
+		"prefix": "awkvar",
+		"body": [
+			"{var=sprintf(\"%s\", \"this is var value.\"); print var}"
+		],
+		"description": "awk: use variable"
+	}
+}

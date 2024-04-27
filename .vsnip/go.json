@@ -17,6 +17,14 @@
 		],
 		"description": "const"
 	},
+	"testcase": {
+		"scope": "go",
+		"prefix": "tc",
+		"body": [
+			"{ $1 },"
+		],
+		"description": "testcase"
+	},
 	"cmpdiff": {
 		"scope": "go",
 		"prefix": "cmp",
@@ -57,11 +65,22 @@
 		"scope": "go",
 		"prefix": "err",
 		"body": [
-			"if $1 != nil {",
-			"    $2",
-			"}"
+			"if err != nil {",
+			"    $1",
+			"}",
+			"$2"
 		],
 		"description": "if error"
+	},
+	"if error is not nil": {
+		"scope": "go",
+		"prefix": "err2",
+		"body": [
+			"if err := $1; err != nil {",
+			"    $2",
+			"}$3"
+		],
+		"description": "if error is not nil"
 	},
 	"indexed for loop": {
 		"scope": "go",
@@ -120,6 +139,17 @@
 			"}"
 		],
 		"description": "Main function"
+	},
+	"Main function in main package": {
+		"scope": "go",
+		"prefix": "mm",
+		"body": [
+			"package main",
+			"func main() {",
+			"    $1",
+			"}"
+		],
+		"description": "Main function in main package"
 	},
 	"Map type": {
 		"scope": "go",
@@ -249,5 +279,33 @@
 			"`xml:\"$1\"`"
 		],
 		"description": "xml struct tag"
+	},
+	"log.Fatalf()": {
+		"scope": "go",
+		"prefix": "ff",
+		"body": [
+			"log.Fatalf(\"$1 failed. err: %s\", err)$2"
+		],
+		"description": "log.Fatalf()"
+	},
+	"fmt.Errorf()": {
+		"scope": "go",
+		"prefix": "ef",
+		"body": [
+			"fmt.Errorf(\"$1 failed. err: %s\", err)$2"
+		],
+		"description": "fmt.Errorf()"
+	},
+	"else if": {
+		"scope": "go",
+		"prefix": "elseif",
+		"body": [
+			"if $1 {",
+			"    $2",
+			"} else if $3 {",
+			"    $4",
+			"}$5"
+		],
+		"description": "else if"
 	}
 }

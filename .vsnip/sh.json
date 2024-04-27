@@ -1,0 +1,30 @@
+{
+	"test file with -s": {
+		"scope": "sh",
+		"prefix": "tests",
+		"body": [
+			"if [ -s \"$FILE\" ]; then",
+			"    echo \"$FILE has a size greater than zero.\"",
+			"else",
+			"    echo \"$FILE hasnot a size greater than zero.\"",
+            "fi"
+		],
+		"description": "test file with -s"
+	},
+	"task runner": {
+		"scope": "sh",
+		"prefix": "runner",
+		"body": [
+            "#!/bin/sh",
+            "",
+            "if [[ \\${BASH_ARGV[0]} == \"$1\" ]]; then",
+            "    $2",
+            "elif [[ \\${BASH_ARGV[0]} == \"$3\" ]]; then",
+            "    $4",
+            "else",
+            "    echo \"unexpected task is specified.\"",
+            "fi"
+		],
+		"description": "task runner"
+	}
+}
