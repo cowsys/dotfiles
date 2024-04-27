@@ -1,4 +1,14 @@
 {
-    "Layout": "bottom-up",
-    "InitialFilter": "Fuzzy"
+    "Layout": "top-down",
+    "InitialFilter": "SmartCase",
+    "Action": {
+        "foo.ToggleSelectionAndSelectPrevious": [
+            "peco.ToggleSelection",
+            "peco.SelectDown"
+        ]
+    },
+    "Keymap": {
+        "C-j": "foo.ToggleSelectionAndSelectPrevious",
+        "C-k": "peco.ToggleSelectionAndSelectNext"
+    }
 }
