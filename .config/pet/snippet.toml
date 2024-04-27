@@ -1,0 +1,49 @@
+[[snippets]]
+  description = "execute command taking sleep into consideration with xargs"
+  command = "xargs -S 1000 -I % sh -c '{ echo %; $cmd %; sleep 10;}'"
+  output = ""
+
+[[snippets]]
+  description = "filename with date"
+  command = "filename.$(date \"+%Y%m%d\").log"
+  output = ""
+
+[[snippets]]
+  description = "mkdir dated directory"
+  command = "DATE=`date \"+%Y%m%d\"`;mkdir ${DATE}_"
+  output = ""
+
+[[snippets]]
+  description = "extract with jq"
+  command = "| jq ."
+  output = ""
+
+[[snippets]]
+  description = "edit .bashrc"
+  command = "vim ~/.bashrc"
+  output = ""
+
+[[snippets]]
+  description = "source .bashrc"
+  command = "source ~/.bashrc"
+  output = ""
+
+[[snippets]]
+  description = "less pipe"
+  command = "| less"
+  output = ""
+
+[[snippets]]
+  description = "go run main"
+  command = "go run main.go"
+  output = ""
+
+[[snippets]]
+  description = "list categories of codepocket"
+  command = "ll -1 | sed -E 's#^[0-9]{8}_([a-z]+)-.*#\\1#' | sort | uniq"
+  output = ""
+
+[[snippets]]
+  description = "check git status of directory under current directory"
+  command = "ll -1 |  xargs -S 1000 -I % sh -c \"{ echo '###%###'; cd %; git status; cd -;}\""
+  output = ""
