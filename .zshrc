@@ -2,20 +2,21 @@ export TERM="xterm-256color"
 
 
 export PATH=$HOME/bin:$PATH
+export PATH=$HOME/src/github.com/thinca/vim-themis/bin:$PATH # for vim-themis
 export PATH=$HOME/node_modules/.bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=$HOME/google-cloud-sdk/bin/:$PATH
+export PATH=/usr/local/opt/php@8.1/bin:$PATH
 export GOPATH=$HOME
 export THEMIS_HOME=$HOME/src/github.com/thinca/vim-themis # for vim-themis
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-# GIT_PS1_SHOWUPSTREAM=true
-# GIT_PS1_SHOWUNTRACKEDFILES=true
-# GIT_PS1_SHOWDIRTYSTATE=true
-# GIT_PS1_SHOWSTASHSTATE=true
+autoload -U colors && colors
+PS1="[%?]%{$bg[blue]%}%n@%m %~ %{$reset_color%}%% "
+# PS1="[%?]\u001b[%(?.44m.41m)%n@%m %~ %{$reset_color%}%% "
 
-source /usr/local/opt/spaceship/spaceship.zsh
+# source /usr/local/opt/spaceship/spaceship.zsh
 
 
 # paths for popular directries
@@ -51,9 +52,15 @@ alias -g G='| grep'
 alias -g GV='| grep -v'
 alias -g L='| less'
 alias -g V='| nvim -'
+alias -g P="| peco"
+alias -g H="head -n1"
+alias -g HH="head -n5"
+alias -g T="tail -n1"
+alias -g TT="tail -n5"
 
 
 alias ghqq=ghqq
+alias vh=vimcd
 alias gh=ghqcd
 alias ghh=ghqcd2
 alias ghhh=ghqcd3
@@ -62,6 +69,8 @@ alias dd="cd $HOME/src/github.com/cowsys/codepocket"
 alias ddd=pecocodepocket
 alias lll=pecoll
 alias lk=pecollcodepocket
+alias mr=mrun
+alias c=colorize_stderr
 
 # 履歴ファイルの保存先
 export HISTFILE=${HOME}/.zsh_history
@@ -154,6 +163,10 @@ function pecocodepocket() {
     local found="$( find $TARGET_PATH -maxdepth 1 -type d ! -path "*/.*" | cut -d / -f 8,9 | sort -r | peco )"
     cd "$TARGET_PATH/$found"
 }
+function vimcd() {
+    local found="$( find $HOME/.vim -maxdepth 4 -type d | peco )"
+    cd "$found"
+}
 function ghqcd() {
     local found="$( find $HOME/src/github.com/cowsys -maxdepth 1 -type d ! -path "*/.*" | peco )"
     cd "$found"
@@ -172,6 +185,12 @@ function vcd() {
     local found="$( find $TARGET_PATH -maxdepth 3 -type d | cut -d / -f 8,9 | peco )"
     cd "$TARGET_PATH/$found"
 }
+
+function mrun() {
+    local found="$( cat Makefile | grep "^\w" | tr -d : | peco )"
+    make "$found"
+}
+
 function lman() {
     man -M ~/src/github.com/cowsys/linux-doc/man/usrshareman/ "$@"
 }
@@ -191,7 +210,7 @@ if [ -n "$NVIM" ]; then
 fi
 
 # search history by peco
-peco-select-history() {
+function peco-select-history() {
   local NUM=$(history | wc -l)
   local FIRST=$((-1*(NUM-1)))
 
@@ -221,4 +240,5 @@ peco-select-history() {
     history -d $((HISTCMD-1))
   fi
 }
-bind -x '"\C-r": peco-select-history'
+
+colorize_stderr()(set -o pipefail;"$@" 2> >(sed $'s,.*,\e[31m&\e[m,'>&2))

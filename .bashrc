@@ -1,8 +1,12 @@
 export GOPATH=$HOME
-export PATH=/usr/local/bin:$PATH:$HOME/google-cloud-sdk/bin
-# tmuxでvimの色付けされない問題(http://qiita.com/sutoh/items/296b1277b00beae87106)
-export TERM=xterm-256color
+export PATH=$HOME/bin:$PATH
+export PATH=$HOME/tmp/bin:$PATH
+export PATH=$HOME/src/github.com/thinca/vim-themis/bin:$PATH # for vim-themis
+# export PATH=/usr/local/bin:$PATH:$HOME/google-cloud-sdk/bin
+
 export HISTSIZE=500000
+# ANSI escape codes: https://saturncloud.io/blog/how-to-print-colored-text-to-the-terminal/
+export PS1='[$?]\[\033[44m\][j:\j] \h@\u: \W \[\033[00m\]\n\$ '
 
 # GIT_PS1_SHOWUPSTREAM=true
 # GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -11,8 +15,9 @@ export HISTSIZE=500000
 # export PS1='\h\[\033[00m\]:\W\[\033[31m\]\n$(__git_ps1 [%s])\[\033[00m\]\$ '
 
 alias ll='ls -la'
-# alias v='nvim'
-# alias vim='nvim'
+alias diff="colordiff"
+alias sed="gsed"
+
 alias ccd='pecocd'
 alias pp='peco-select-history'
 alias gh='ghcd'
@@ -21,74 +26,59 @@ alias gc='git checkout'
 alias gs='git status'
 alias gp='git pull'
 
-alias vim="nvim"
+
+alias vim='nvim'
 alias v='nvim'
 alias vv='nvim +te'
 alias vr='nvim -R'
 
+alias gd='go doc'
+alias ge='goex'
 
-# ### 仮想端末のコマンド履歴を共有 {{{
-# function share_history {
-#     history -a
-#     history -c
-#     history -r
-# }
-# PROMPT_COMMAND='share_history'
-# shopt -u histappend
-# ### }}}
+
+### 仮想端末のコマンド履歴を共有 {{{
+function share_history {
+    history -a
+    history -c
+    history -r
+}
+PROMPT_COMMAND='share_history'
+shopt -u histappend
+### }}}
 
 function pecocd {
-    local found="$( find . -maxdepth 3 -type d ! -path "*/.*" | sort -r | peco )"
+    local found
+    found="$( find . -maxdepth 3 -type d ! -path "*/.*" | sort -r | peco )"
     cd "$found"
 }
 
 function ghcd {
-    local dir="$( find $HOME/src/*/* -type d -maxdepth 1 | peco )"
-    if [ ! -z "$dir" ] ; then
+    local dir
+    dir="$( find $HOME/src/*/* -type d -maxdepth 1 | peco )"
+    if [ -n "$dir" ] ; then
         cd "$dir"
     fi
 }
 
-# search history by peco(http://www.fisproject.jp/2015/01/peco/)
 peco-select-history() {
-  local NUM=$(history | wc -l)
-  local FIRST=$((-1*(NUM-1)))
-
-  if [ $FIRST -eq 0 ] ; then
-    # Remove the last entry, "peco-history"
-    history -d $((HISTCMD-1))
-    echo "No history" >&2
-    return
-  fi
-
-  local CMD=$( fc -l ${FIRST} | LC_ALL=C sort -k 2 -k 1nr | LC_ALL=C uniq -f 1 |  LC_ALL=C sort -nr | sed -E 's/^[0-9]+[[:blank:]]+//' | peco | head -n 1)
-
-  echo  "---$CMD---"
-# -n string
-#        True if the length of string is non-zero.
-  if [ -n "$CMD" ] ; then
-    # Replace the last entry, "peco-history", with $CMD
-    history -s $CMD
-
-    if type osascript > /dev/null 2>&1 ; then
-      # Send UP keystroke to console
-      (osascript -e 'tell application "System Events" to keystroke (ASCII character 30)' &)
+    local FIRSTLINE_NO=1
+    local CMD
+    CMD=$( fc -l ${FIRSTLINE_NO} | \
+        sort -k 2 -k 1nr | \
+        uniq -f 1 | \
+        sort -nr | \
+        sed -E 's/^[0-9]+[[:blank:]]+//' | \
+        peco | head -n 1)
+    if [ -n "$CMD" ] ; then
+        READLINE_LINE="$CMD"
     fi
-
-    # Uncomment below to execute it here directly
-    # echo $CMD >&2
-    # eval $CMD
-  else
-    # Remove the last entry, "peco-history"
-    history -d $((HISTCMD-1))
-  fi
 }
-# bind -x '"\C-r": peco-select-history'
+bind -x '"\C-r": peco-select-history'
 
 
 # You may uncomment the following lines if you want `ls' to be colorized:
 export LS_OPTIONS='--color=auto'
-eval "$(dircolors -b)"
+# eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
 alias ll='ls $LS_OPTIONS -l'
 alias l='ls $LS_OPTIONS -lA'
@@ -105,8 +95,30 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 
-# bind -x '"\C-r": peco-select-history'
-# bind '"\C-r": previous-history'
-# bind '"\C-n": previous-history'
-# # bind '"\C-p": next-history'
-bind '"\C-o": previous-history'
+# don't permit to open nvim inside nvim
+# ref: practical vim p90
+# "Using a Shell Alias to Prevent Accidental Nesting"
+if [ -n "$NVIM" ]; then
+    if [ -x "$(command -v nvr)" ]; then
+        alias nvim=nvr
+    else
+        alias nvim='echo "No nesting!"'
+    fi
+fi
+
+
+function pet-select() {
+  # to use READLINE_* vars,
+  # you need to use newer bash than macOS builtin bash.
+  BEFORE_READLINE_LINE=$READLINE_LINE
+  BUFFER=$(pet search --query "")
+  READLINE_LINE="$BEFORE_READLINE_LINE $BUFFER"
+  READLINE_POINT=${#BUFFER}
+}
+bind -x '"\C-x\C-r": pet-select'
+
+
+function copy-line() {
+  echo -n "$READLINE_LINE" | pbcopy
+}
+bind -x '"\C-x\C-e": copy-line'
